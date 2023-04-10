@@ -10,9 +10,12 @@ package code;
  */
 public enum Tokens {
     Texto,
-    Articulo,
+    Linea,
+    AperturaArticulo,
+    CierreArticulo,
     Titulo,
     Sección,
+    Numero,
     ERROR
     
 }

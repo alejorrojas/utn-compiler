@@ -8,7 +8,7 @@ import java.io.File;
  */
 public class Principal {
 
- public static void main(String[] args) {
+ public static void main() {
         String ruta = "C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/lexer.flex";
         generarLexer(ruta);
     }

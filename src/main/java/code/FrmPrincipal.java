@@ -22,6 +22,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        //Generamos el lexer
+        Principal.main();
     }
 
     /**
@@ -76,37 +78,37 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnReset))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(textoEntrada)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReset)))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReset)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
-        // TODO add your handling code here:
+        int contadorLinea = 1;
         File archivo = new File("entrada.txt");
         PrintWriter escribir;
         
@@ -122,7 +124,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             Reader lector = new BufferedReader(new FileReader("entrada.txt"));
             Lexer lexer = new Lexer(lector);
-            String outputText = "";
+            String outputText =  "LINEA " + contadorLinea + "\t\t\tSIMBOLOS\n";
             
             while(true){
                 Tokens tokens = null;
@@ -134,14 +136,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
                 
                  switch (tokens) {
-                    case ERROR:
-                        outputText += "Simbolo no definido\n";
+                    case Linea:
+                        contadorLinea++;
+                        outputText += "LINEA " + contadorLinea + "\n";
                         break;
-                    case Texto: case Articulo: case Sección:
-                        outputText += lexer.lexeme + ": Es un " + tokens + "\n";
+                    case ERROR:
+                        outputText += "Error\t\t Simbolo no definido\n";
+                        break;
+                    case Texto: case AperturaArticulo: case CierreArticulo: case Sección: case Titulo:
+                        outputText += tokens+"\t\t\t" + lexer.lexeme + "\n";
                         break;
                     default:
-                        outputText += "Token: " + tokens + "\n";
+                        outputText += "Token: " + lexer.lexeme + "\n";
                         break;
                 }
             }
