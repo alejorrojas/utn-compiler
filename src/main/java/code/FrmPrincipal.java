@@ -143,8 +143,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     case ERROR:
                         outputText += "Error\t\t Simbolo no definido\n";
                         break;
-                    case Texto: case AperturaArticulo: case CierreArticulo: case Sección: case Titulo:
-                        outputText += tokens+"\t\t\t" + lexer.lexeme + "\n";
+                    case Texto: case AperturaArticulo: case CierreArticulo: case CierreSeccion: case AperturaSeccion: case Titulo:
+                        outputText += tokens+"\t\t" + lexer.lexeme + "\n";
                         break;
                     default:
                         outputText += "Token: " + lexer.lexeme + "\n";

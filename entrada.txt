@@ -1,1 +1,1 @@
-<title>Nacion</title>
+<sect><article>Hola<article></sect>

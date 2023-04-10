@@ -14,7 +14,8 @@ public enum Tokens {
     AperturaArticulo,
     CierreArticulo,
     Titulo,
-    Sección,
+    AperturaSeccion,
+    CierreSeccion,
     Numero,
     ERROR
     

@@ -8,8 +8,8 @@ import static code.Tokens.*;
 texto=[a-zA-Z_]+
 numeros=[0-9]+
 espacio=[ ,\t,\r,\n]+
-articleApertura=<article\s*.*>
-section=<sect\s*.*>\s*.*<\/sect>
+articleApertura=<article>
+sectionApertura=<sect>
 title=<title\s*.*>\s*.*<\/title>
     
 %{
@@ -19,7 +19,8 @@ title=<title\s*.*>\s*.*<\/title>
 %%
 {articleApertura} {lexeme=yytext(); return AperturaArticulo;}
 "</article>" {lexeme=yytext(); return CierreArticulo;}
-{section} {lexeme=yytext(); return Sección;}
+{sectionApertura} {lexeme=yytext(); return AperturaSeccion;}
+"</sect>" {lexeme=yytext(); return CierreSeccion;}
 {title} {lexeme=yytext(); return Titulo;}
 {texto}({texto}|{numeros})* {lexeme=yytext(); return Texto;}
 {numeros} {lexeme=yytext(); return Numero;}
