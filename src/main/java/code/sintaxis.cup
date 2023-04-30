@@ -54,5 +54,5 @@ start with INICIO;
 
 INICIO::= Encabezado ArticleApertura ETIQUETAS ArticleCierre;
 
-ETIQUETAS::= AperturaInfo Texto CierreInfo;
+ETIQUETAS::= AperturaInfo Texto CierreInfo; 
 
