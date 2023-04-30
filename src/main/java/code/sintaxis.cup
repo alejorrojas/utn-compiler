@@ -1,0 +1,58 @@
+package code;
+
+import java_cup.runtime.*;
+import java.io.FileReader;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getSymbol(){
+        return this.s;
+}
+:};
+
+
+terminal Encabezado,
+    ArticleApertura,
+    ArticleCierre,
+    AperturaInfo,
+    CierreInfo,
+    AperturaTitulo,
+    CierreTitulo,
+    AperturaListaPuntos,
+    CierreListaPuntos,
+    AperturaImportante,
+    CierreImportante,
+    AperturaParrafo,
+    CierreParrafo,
+    AperturaDireccion,
+    CierreDireccion,
+    AperturaObjetoMedios,
+    CierreObjetoMedios,
+    AperturaTablaInformal,
+    CierreTablaInformal,
+    AperturaComentario,
+    CierreComentario,
+    AperturaResumen,
+    CierreResumen,
+    AperturaSeccionSimple,
+    CierreSeccionSimple,
+    AperturaFecha,
+    CierreFecha,
+    AperturaDerechos,
+    CierreDerechos,
+    Texto,
+    ERROR;
+
+non terminal INICIO, ETIQUETAS;
+start with INICIO;
+
+INICIO::= Encabezado ArticleApertura ETIQUETAS ArticleCierre;
+
+ETIQUETAS::= AperturaInfo Texto CierreInfo;
+
