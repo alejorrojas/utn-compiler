@@ -22,8 +22,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //Generamos el lexer
-        Principal.main();
     }
 
     /**
@@ -134,7 +132,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     textoResultado.setText(outputText);
                     return;
                 }
-                
+              
                  switch (tokens) {
                     case Linea:
                         contadorLinea++;
@@ -143,11 +141,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     case ERROR:
                         outputText += "Error\t\t Simbolo no definido\n";
                         break;
-                    case Texto: case AperturaArticulo: case CierreArticulo: case CierreSeccion: case AperturaSeccion: case Titulo:
-                        outputText += tokens+"\t\t" + lexer.lexeme + "\n";
-                        break;
                     default:
-                        outputText += "Token: " + lexer.lexeme + "\n";
+                        outputText += tokens+"\t\t" + lexer.lexeme + "\n";
                         break;
                 }
             }
