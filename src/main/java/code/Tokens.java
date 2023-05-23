@@ -88,5 +88,7 @@ public enum Tokens {
     CierreListItem,
     Texto,
     Linea,
-    ERROR
+    ERROR,
+    Url,
+    EncabezadoXML
 }

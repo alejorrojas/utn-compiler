@@ -5,15 +5,20 @@ import static code.Tokens.*;
 %type Tokens
 %line
 
-texto=[a-zA-Z_]+
-numeros=[0-9]+
-espacio=[ ,\t,\r,\n]+
-    
+texto=[a-zA-Z_,0-9,/,\.]+
+espacio=[ \t\r\n]+
+signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%·$]+
+url="https://".+|"http://".+|"ftp://".+|"ftps://".+
+link="<link xlink:href:\""+{url}+"\" />"
+videodata="<videodata fileref:\""+({url}|{texto})+"\" />"
+imagedata="<imagedata fileref:\""+({url}|{texto})+"\" />"
+ 
 %{
     public String lexeme;
 %}
 
 %%
+"<!DOCTYPE article>" {lexeme=yytext(); return EncabezadoXML;}
 "<article>" {lexeme=yytext(); return AperturaArticulo;}
 "</article>" {lexeme=yytext(); return CierreArticulo;}
 "<sect>" {lexeme=yytext(); return AperturaSeccion;}
@@ -68,7 +73,6 @@ espacio=[ ,\t,\r,\n]+
 "</holder>" {lexeme=yytext(); return CierreHolder;}
 "<emphasis>" {lexeme=yytext(); return AperturaEmphasis;}
 "</emphasis>" {lexeme=yytext(); return CierreEmphasis;}
-"<link/>" {lexeme=yytext(); return Link;}
 "<comment>" {lexeme=yytext(); return AperturaComment;}
 "</comment>" {lexeme=yytext(); return CierreComment;}
 "<tgroup>" {lexeme=yytext(); return AperturaTgroup;}
@@ -89,11 +93,12 @@ espacio=[ ,\t,\r,\n]+
 "</videoobject>" {lexeme=yytext(); return CierreVideoobject;}
 "<imageobject>" {lexeme=yytext(); return AperturaImageobject;}
 "</imageobject>" {lexeme=yytext(); return CierreImageobject;}
-"<videodata/>" {lexeme=yytext(); return Videodata;}
-"<imagedata/>" {lexeme=yytext(); return Imagedata;}
 "<listitem>" {lexeme=yytext(); return AperturaListItem;}
 "</listitem>" {lexeme=yytext(); return CierreListItem;}
-{texto}({texto}|{numeros}|{espacio})* {lexeme=yytext(); return Texto;}
+{link} {lexeme=yytext(); return Link;}
+{url} {lexeme=yytext(); return Url;}
+{videodata} {lexeme=yytext(); return Videodata;}
+{imagedata} {lexeme=yytext(); return Imagedata;}
 "\n" {return Linea;}
-{espacio} {/*Ignore*/}
- . {return ERROR;}
+({texto}|{espacio}|{signos})* {lexeme=yytext(); return Texto;}
+. {lexeme=yytext(); return Texto;}

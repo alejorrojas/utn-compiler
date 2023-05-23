@@ -33,11 +33,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        textArea1 = new java.awt.TextArea();
         btnAnalizar = new javax.swing.JButton();
-        textoEntrada = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textoResultado = new javax.swing.JTextArea();
+        textoEntrada = new javax.swing.JTextArea();
         btnReset = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textoResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,18 +51,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        textoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textoEntrada.setToolTipText("Texto a analizar.....");
-        textoEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoEntradaActionPerformed(evt);
-            }
-        });
-
-        textoResultado.setColumns(20);
-        textoResultado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textoResultado.setRows(5);
-        jScrollPane1.setViewportView(textoResultado);
+        textoEntrada.setColumns(20);
+        textoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoEntrada.setRows(5);
+        textoEntrada.setText("Texto a analizar...");
+        jScrollPane1.setViewportView(textoEntrada);
 
         btnReset.setText("Limpiar");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -69,37 +64,46 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        textoResultado.setColumns(20);
+        textoResultado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoResultado.setRows(5);
+        jScrollPane2.setViewportView(textoResultado);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textoEntrada)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnReset)))
-                .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReset)
+                .addGap(34, 34, 34)
+                .addComponent(btnAnalizar)
+                .addGap(33, 33, 33))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addContainerGap(754, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(526, 526, 526)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                    .addGap(23, 23, 23)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReset)
-                .addGap(23, 23, 23))
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReset)
+                    .addComponent(btnAnalizar))
+                .addGap(15, 15, 15))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(62, 62, 62)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(55, Short.MAX_VALUE)))
         );
 
         pack();
@@ -139,7 +143,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         outputText += "LINEA " + contadorLinea + "\n";
                         break;
                     case ERROR:
-                        outputText += "Error\t\t Simbolo no definido\n";
+                        outputText += "Error\t\t Simbolo no definido" + lexer.lexeme + "\n";
                         break;
                     default:
                         outputText += tokens+"\t\t" + lexer.lexeme + "\n";
@@ -156,14 +160,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
-    private void textoEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoEntradaActionPerformed
-
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-         textoResultado.setText("");
          textoEntrada.setText("");
+         textoResultado.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
 
     /**
@@ -205,7 +205,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAnalizar;
     private javax.swing.JButton btnReset;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField textoEntrada;
+    private javax.swing.JScrollPane jScrollPane2;
+    private java.awt.TextArea textArea1;
+    private javax.swing.JTextArea textoEntrada;
     private javax.swing.JTextArea textoResultado;
     // End of variables declaration//GEN-END:variables
 }
