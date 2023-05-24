@@ -35,5 +35,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-### Collaborative work carried out for the Department of Syntax and Semantics of Languages at Universidad Tecnologica Nacional
+### Collaborative work carried out for the Department of Syntax and Semantics of Languages at [Universidad Tecnologica Nacional Frre](https://www.frre.utn.edu.ar/)
 
