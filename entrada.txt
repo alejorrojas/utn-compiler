@@ -1,4 +1,5 @@
 <!DOCTYPE article>
+
 <article>
 <info>
 <title>El titulo del articulo</title>
@@ -7,13 +8,9 @@
 <surname>Perez</surname>
 </author>
 </info>
-<sect1>
+<sect>
 <title>Titulo para la seccion 1</title>
-<para>
-Esto es un parrafo
-</para>
-<para>
-Otro parrafo.
-</para>
-</sect1>
+<para>Esto es un parrafo</para>
+<para>Otro parrafo.</para>
+</sect>
 </article>

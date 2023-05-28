@@ -100,5 +100,6 @@ imagedata="<imagedata fileref:\""+({url}|{texto})+"\" />"
 {videodata} {lexeme=yytext(); return Videodata;}
 {imagedata} {lexeme=yytext(); return Imagedata;}
 "\n" {return Linea;}
+{espacio} {/*IGNORE*/}
 ({texto}|{espacio}|{signos})* {lexeme=yytext(); return Texto;}
 . {lexeme=yytext(); return Texto;}

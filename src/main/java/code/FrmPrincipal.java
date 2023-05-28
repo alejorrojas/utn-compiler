@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -33,13 +35,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textArea1 = new java.awt.TextArea();
-        btnAnalizar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textoEntrada = new javax.swing.JTextArea();
-        btnReset = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        textoResultado = new javax.swing.JTextArea();
+        jTextArea1 = new javax.swing.JTextArea();
+        btnAnalizar = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textoEntrada = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textoResultado = new javax.swing.JTextPane();
+        btnAbrirArchivo = new javax.swing.JButton();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,12 +59,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        textoEntrada.setColumns(20);
-        textoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textoEntrada.setRows(5);
-        textoEntrada.setText("Texto a analizar...");
-        jScrollPane1.setViewportView(textoEntrada);
-
         btnReset.setText("Limpiar");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,46 +66,60 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        textoResultado.setColumns(20);
+        textoEntrada.setColumns(20);
+        textoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoEntrada.setRows(5);
+        jScrollPane3.setViewportView(textoEntrada);
+
         textoResultado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textoResultado.setRows(5);
-        jScrollPane2.setViewportView(textoResultado);
+        textoResultado.setFocusable(false);
+        jScrollPane4.setViewportView(textoResultado);
+
+        btnAbrirArchivo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAbrirArchivo.setText("Abrir archivo");
+        btnAbrirArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirArchivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReset)
-                .addGap(34, 34, 34)
-                .addComponent(btnAnalizar)
-                .addGap(33, 33, 33))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                .addContainerGap(754, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(526, 526, 526)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-                    .addGap(23, 23, 23)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1005, 1005, 1005)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAbrirArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(792, 792, 792)
+                                .addComponent(btnAnalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(9, 9, 9)))))
+                .addGap(76, 76, 76))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset)
+                    .addComponent(btnAbrirArchivo)
                     .addComponent(btnAnalizar))
-                .addGap(15, 15, 15))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(62, 62, 62)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(55, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addGap(18, 18, 18)
+                .addComponent(btnReset)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,6 +182,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
          textoResultado.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void btnAbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArchivoActionPerformed
+         JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+         File archivo = new File(chooser.getSelectedFile().getAbsolutePath());
+         String StringToAnalize;
+        try {
+            StringToAnalize = new String(Files.readAllBytes(archivo.toPath()));
+            textoEntrada.setText(StringToAnalize);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAbrirArchivoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,12 +231,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbrirArchivo;
     private javax.swing.JButton btnAnalizar;
     private javax.swing.JButton btnReset;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private java.awt.TextArea textArea1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea textoEntrada;
-    private javax.swing.JTextArea textoResultado;
+    private javax.swing.JTextPane textoResultado;
     // End of variables declaration//GEN-END:variables
 }
