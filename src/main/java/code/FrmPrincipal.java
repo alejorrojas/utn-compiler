@@ -67,11 +67,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
 
         textoEntrada.setColumns(20);
-        textoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoEntrada.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         textoEntrada.setRows(5);
         jScrollPane3.setViewportView(textoEntrada);
 
-        textoResultado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoResultado.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         textoResultado.setFocusable(false);
         jScrollPane4.setViewportView(textoResultado);
 
@@ -90,8 +90,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(1005, 1005, 1005)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +142,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             Reader lector = new BufferedReader(new FileReader("entrada.txt"));
             Lexer lexer = new Lexer(lector);
-            String outputText =  "LINEA " + contadorLinea + "\t\t\tSIMBOLOS\n";
+            String outputText = "";
             
             while(true){
                 Tokens tokens = null;
@@ -152,15 +152,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     textoResultado.setText(outputText);
                     return;
                 }
-              
                  switch (tokens) {
-                    case Linea:
-                        contadorLinea++;
-                        outputText += "LINEA " + contadorLinea + "\n";
-                        break;
-                    case ERROR:
-                        outputText += "Error\t\t Simbolo no definido" + lexer.lexeme + "\n";
-                        break;
                     default:
                         outputText += tokens+"\t\t" + lexer.lexeme + "\n";
                         break;
