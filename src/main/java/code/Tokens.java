@@ -90,5 +90,6 @@ public enum Tokens {
     Linea,
     ERROR,
     Url,
-    EncabezadoXML
+    EncabezadoXML,
+    UndefinedToken
 }

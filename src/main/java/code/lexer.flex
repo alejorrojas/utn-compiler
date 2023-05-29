@@ -12,6 +12,8 @@ url="https://".+|"http://".+|"ftp://".+|"ftps://".+
 link="<link xlink:href:\""+{url}+"\" />"
 videodata="<videodata fileref:\""+({url}|{texto})+"\" />"
 imagedata="<imagedata fileref:\""+({url}|{texto})+"\" />"
+cualquiercosa=.+
+error="<"+({signos}|{texto}|{espacio})*+">"
  
 %{
     public String lexeme;
@@ -100,5 +102,6 @@ imagedata="<imagedata fileref:\""+({url}|{texto})+"\" />"
 {videodata} {lexeme=yytext(); return Videodata;}
 {imagedata} {lexeme=yytext(); return Imagedata;}
 {espacio} {/*IGNORE*/}
+{error} {lexeme=yytext();return ERROR;}
 ({texto}|{espacio}|{signos})* {lexeme=yytext(); return Texto;}
-. {lexeme=yytext(); return Texto;}
+. {lexeme=yytext(); return UndefinedToken;}
