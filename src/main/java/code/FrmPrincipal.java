@@ -152,9 +152,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     return;
                 }
                  switch (tokens) {
-                    case ERROR:
-                         outputText += tokens+"\t\t" + lexer.lexeme + "\n";
-                         break;
                     case UndefinedToken:
                          outputText += "Simbolo no definido\t" + lexer.lexeme + "\n";
                          break;

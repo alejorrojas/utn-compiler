@@ -9,9 +9,9 @@ texto=[a-zA-Z_,0-9,/,\.]+
 espacio=[ \t\r\n]+
 signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%·$]+
 url="https://".+|"http://".+|"ftp://".+|"ftps://".+
-link="<link xlink:href:\""+{url}+"\" />"
-videodata="<videodata fileref:\""+({url}|{texto})+"\" />"
-imagedata="<imagedata fileref:\""+({url}|{texto})+"\" />"
+link="<link xlink:href:\""+{url}+"\" />"|"<link xlink:href:\""+{url}+"\"/>"
+videodata="<videodata fileref:\""+({url}|{texto})+"\" />"|"<videodata fileref:\""+({url}|{texto})+"\"/>"
+imagedata="<imagedata fileref:\""+({url}|{texto})+"\" />"|"<imagedata fileref:\""+({url}|{texto})+"\"/>"
 cualquiercosa=.+
 error="<"+({signos}|{texto}|{espacio})*+">"
  

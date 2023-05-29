@@ -1,1 +1,1 @@
-<imagedata fileref:"image.png" />
+<videodata fileref:"image.png" />
