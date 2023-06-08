@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 public class Principal {
 
  public static void main(String[] args) throws Exception {
-        String rutaLexer = "C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/lexer.flex";
-        String[] rutaSintaxis = {"-parser", "Sintax", "C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/sintaxis.cup"};
+        String rutaLexer = "C:/Users/alejo/Desktop/proyect/utn/utn-lexer/src/main/java/code/lexerCup.flex";
+        String[] rutaSintaxis = {"-parser", "Sintax", "C:/Users/alejo/Desktop/proyect/utn/utn-lexer/src/main/java/code/sintaxis.cup"};
         
         generarLexerParser(rutaLexer, rutaSintaxis);
     }
@@ -24,21 +24,21 @@ public class Principal {
         JFlex.Main.generate(archivoLexer);
         java_cup.Main.main(pathSintaxis);
         
-        Path rutaSym = Paths.get("C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/sym.java");
+        Path rutaSym = Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-lexer/src/main/java/code/sym.java");
         if (Files.exists(rutaSym)) {
             Files.delete(rutaSym);
         }
         Files.move(
-                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/sym.java"), 
-                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/sym.java")
+                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-lexer/sym.java"), 
+                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-lexer/src/main/java/code/sym.java")
         );
-        Path rutaSin = Paths.get("C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/Sintax.java");
+        Path rutaSin = Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-lexer/src/main/java/code/Sintax.java");
         if (Files.exists(rutaSin)) {
             Files.delete(rutaSin);
         }
         Files.move(
-                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/Sintax.java"), 
-                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/neatbeans-lexer/src/main/java/code/Sintax.java")
+                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-lexer/Sintax.java"), 
+                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-lexer/src/main/java/code/Sintax.java")
         );
  
     }
