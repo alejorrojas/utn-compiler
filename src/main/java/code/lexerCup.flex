@@ -29,8 +29,8 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 %%
 
 "<!DOCTYPE article>" {return new Symbol(sym.EncabezadoXML, yychar, yyline, yytext());}
-"<article>" {return new Symbol(sym.CierreArticulo, yychar, yyline, yytext());}
-"</article>" {return new Symbol(sym.UndefinedToken, yychar, yyline, yytext());}
+"<article>" {return new Symbol(sym.AperturaArticulo, yychar, yyline, yytext());}
+"</article>" {return new Symbol(sym.CierreArticulo, yychar, yyline, yytext());}
 "<title>" {return new Symbol(sym.AperturaTitulo, yychar, yyline, yytext());}
 "</title>" {return new Symbol(sym.CierreTitulo, yychar, yyline, yytext());}
 "<info>" {return new Symbol(sym.AperturaInfo, yychar, yyline, yytext());}
@@ -107,7 +107,7 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 {link} {return new Symbol(sym.Url, yychar, yyline, yytext());}
 {videodata} {return new Symbol(sym.Videodata, yychar, yyline, yytext());}
 {imagedata} {return new Symbol(sym.Imagedata, yychar, yyline, yytext());}
-{espacio} {espacio} {/*IGNORE*/}
+{espacio} {/*IGNORE*/}
 {error} {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
 ({texto}|{espacio}|{signos})* {return new Symbol(sym.Texto, yychar, yyline, yytext());}
  . {return new Symbol(sym.UndefinedToken, yychar, yyline, yytext());}
