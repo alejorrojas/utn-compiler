@@ -101,7 +101,7 @@ terminal CierreInformalTable,
     EncabezadoXML,
     UndefinedToken;
 
-non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS ;
+non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL;
 start with INICIO;
 
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
@@ -109,7 +109,8 @@ ARTICULO::= CONTENIDO SECCION SECTSIMPLE | CONTENIDO SECCION | CONTENIDO SECTSIM
 
 CONTENIDO::= AperturaInfo INFORMACION CierreInfo | AperturaInfo INFORMACION CierreInfo AperturaTitulo TITULO CierreTitulo | AperturaTitulo TITULO CierreTitulo ;
 INFORMACION::= Texto | AperturaDate DATE CierreDate AperturaInfo INFORMACION CierreInfo | AperturaDate DATE CierreDate | AperturaCopyright COPYRIGHT CierreCopyright AperturaInfo INFORMACION CierreInfo | AperturaCopyright COPYRIGHT CierreCopyright | AperturaMediaObject MEDIAOBJECT CierreMediaObject AperturaInfo INFORMACION CierreInfo | AperturaMediaObject MEDIAOBJECT CierreMediaObject | AperturaAbstract ABSTRACT CierreAbstract AperturaInfo INFORMACION CierreInfo | AperturaAbstract ABSTRACT CierreAbstract | AperturaAddress ADDRESS CierreAddress AperturaInfo INFORMACION CierreInfo | AperturaAddress ADDRESS CierreAddress | AperturaTitulo TITULO CierreTitulo AperturaInfo INFORMACION CierreInfo | AperturaTitulo TITULO CierreTitulo;
-TITULO::= Texto;
+TITULO::= Texto |Texto AperturaTitulo TITULO CierreTitulo| AperturaEmphasis EMPHASIS CierreEmphasis | AperturaEmphasis EMPHASIS CierreEmphasis AperturaTitulo TITULO CierreTitulo | Link NLINK | Link NLINK AperturaTitulo TITULO CierreTitulo | AperturaEmail EMAIL CierreEmail | AperturaEmail EMAIL CierreEmail AperturaTitulo TITULO CierreTitulo;
+EMPHASIS::= Texto;
 SECCION::= AperturaSection Texto CierreSection;
 SECTSIMPLE::= AperturaSimpleSect Texto CierreSimpleSect;
 
