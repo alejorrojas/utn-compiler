@@ -101,7 +101,7 @@ terminal CierreInformalTable,
     EncabezadoXML,
     UndefinedToken;
 
-non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL, NOTERMINAL1, YEAR, HOLDER, NOTERMINAL2, VIDEOOBJECT, IMAGEOBJECT;
+non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL, NOTERMINAL1, YEAR, HOLDER, NOTERMINAL2, VIDEOOBJECT, IMAGEOBJECT, IMAGEDATAN, VIDEODATAN;
 start with INICIO;
 
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
@@ -113,6 +113,10 @@ TITULO::= Texto |Texto AperturaTitulo TITULO CierreTitulo| AperturaEmphasis EMPH
 DATE::= Texto | NOTERMINAL1;
 COPYRIGHT::= Texto | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright AperturaHolder HOLDER CierreHolder | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright  | AperturaYear YEAR CierreYear; 
 MEDIAOBJECT::= Texto | AperturaInfo INFORMACION CierreInfo NOTERMINAL2 | NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject | AperturaImageobject IMAGEOBJECT CierreImageobject NOTERMINAL2 | AperturaImageobject IMAGEOBJECT CierreImageobject;
+IMAGEOBJECT::= AperturaInfo INFORMACION CierreInfo IMAGEDATAN | IMAGEDATAN;
+VIDEOOBJECT::= AperturaInfo INFORMACION CierreInfo VIDEODATAN | VIDEODATAN;
+IMAGEDATAN::= Texto;
+VIDEODATAN::= Texto;
 EMPHASIS::= Texto;
 SECCION::= AperturaSection Texto CierreSection;
 SECTSIMPLE::= AperturaSimpleSect Texto CierreSimpleSect;
