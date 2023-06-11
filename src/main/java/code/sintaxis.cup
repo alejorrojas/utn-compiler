@@ -132,6 +132,7 @@ IMAGEDATAN::= Texto;
 VIDEODATAN::= Texto;
 EMPHASIS::= Texto;
 PARRAFO::= NOTERMINALM | AperturaItemizedList ITEMIZEDLIST CierreItemizedList AperturaPara PARRAFO CierrePara | AperturaItemizedList ITEMIZEDLIST CierreItemizedList | AperturaImportant IMPORTANT CierreImportant AperturaPara PARRAFO CierrePara | AperturaImportant IMPORTANT CierreImportant | AperturaAddress ADDRESS CierreAddress AperturaPara PARRAFO CierrePara | AperturaAddress ADDRESS CierreAddress | AperturaMediaObject MEDIAOBJECT CierreMediaObject AperturaPara PARRAFO CierrePara| AperturaMediaObject MEDIAOBJECT CierreMediaObject | AperturaInformalTable INFORMALTABLE CierreInformalTable AperturaPara PARRAFO CierrePara | AperturaInformalTable INFORMALTABLE CierreInformalTable;
+SIMPARRAFO::= NOTERMINALM;
 ITEMIZEDLIST::= AperturaListItem LISTITEM CierreListItem ITEMIZEDLIST;
 LISTITEM::=NOTERMINALX;
 SECCION::= AperturaSection ARTICULO CierreSection;
