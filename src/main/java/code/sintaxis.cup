@@ -120,6 +120,7 @@ PHONE::= Texto;
 EMAIL::= Texto;
 ABSTRACT::= Texto | AperturaTitulo TITULO CierreTitulo AperturaPara PARRAFO CierrePara AperturaSimPara SIMPARRAFO CierreSimPara | AperturaTitulo TITULO CierreTitulo AperturaSimPara SIMPARRAFO CierreSimPara AperturaPara PARRAFO CierrePara | AperturaTitulo TITULO CierreTitulo AperturaPara PARRAFO CierrePara | AperturaTitulo TITULO CierreTitulo AperturaSimPara SIMPARRAFO CierreSimPara | AperturaPara PARRAFO CierrePara AperturaSimPara SIMPARRAFO CierreSimPara | AperturaSimPara SIMPARRAFO CierreSimPara AperturaPara PARRAFO CierrePara | AperturaPara PARRAFO CierrePara | AperturaSimPara SIMPARRAFO CierreSimPara;
 COPYRIGHT::= Texto | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright AperturaHolder HOLDER CierreHolder | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright  | AperturaYear YEAR CierreYear; 
+HOLDER::= Texto | NOTERMINAL1 AperturaHolder HOLDER CierreHolder | NOTERMINAL1;
 MEDIAOBJECT::= Texto | AperturaInfo INFORMACION CierreInfo NOTERMINAL2 | NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject | AperturaImageobject IMAGEOBJECT CierreImageobject NOTERMINAL2 | AperturaImageobject IMAGEOBJECT CierreImageobject;
 IMAGEOBJECT::= AperturaInfo INFORMACION CierreInfo IMAGEDATAN | IMAGEDATAN;
 VIDEOOBJECT::= AperturaInfo INFORMACION CierreInfo VIDEODATAN | VIDEODATAN;
