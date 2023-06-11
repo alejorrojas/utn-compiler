@@ -99,7 +99,7 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 "</entry>" {return new Symbol(sym.CierreEntry, yychar, yyline, yytext());}
 "<entrybl>" {return new Symbol(sym.AperturaEntrybl, yychar, yyline, yytext());}
 "</entrybl>" {return new Symbol(sym.CierreEntrybl, yychar, yyline, yytext());}
-"<videoobject>" {return new Symbol(sym.AperturaVideobject, yychar, yyline, yytext());}
+"<videoobject>" {return new Symbol(sym.AperturaVideoobject, yychar, yyline, yytext());}
 "</videoobject>" {return new Symbol(sym.CierreVideoobject, yychar, yyline, yytext());}
 "<imageobject>" {return new Symbol(sym.AperturaImageobject, yychar, yyline, yytext());}
 "</imageobject>" {return new Symbol(sym.CierreImageobject, yychar, yyline, yytext());}

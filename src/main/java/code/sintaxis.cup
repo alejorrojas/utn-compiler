@@ -86,7 +86,7 @@ terminal CierreInformalTable,
     CierreEntry,
     AperturaEntrybl,
     CierreEntrybl,
-    AperturaVideobject,
+    AperturaVideoobject,
     CierreVideoobject,
     AperturaImageobject,
     CierreImageobject,
@@ -112,6 +112,7 @@ INFORMACION::= Texto | AperturaDate DATE CierreDate AperturaInfo INFORMACION Cie
 TITULO::= Texto |Texto AperturaTitulo TITULO CierreTitulo| AperturaEmphasis EMPHASIS CierreEmphasis | AperturaEmphasis EMPHASIS CierreEmphasis AperturaTitulo TITULO CierreTitulo | Link NLINK | Link NLINK AperturaTitulo TITULO CierreTitulo | AperturaEmail EMAIL CierreEmail | AperturaEmail EMAIL CierreEmail AperturaTitulo TITULO CierreTitulo;
 DATE::= Texto | NOTERMINAL1;
 COPYRIGHT::= Texto | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright AperturaHolder HOLDER CierreHolder | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright  | AperturaYear YEAR CierreYear; 
+MEDIAOBJECT::= Texto | AperturaInfo INFORMACION CierreInfo NOTERMINAL2 | NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject | AperturaImageobject IMAGEOBJECT CierreImageobject NOTERMINAL2 | AperturaImageobject IMAGEOBJECT CierreImageobject;
 EMPHASIS::= Texto;
 SECCION::= AperturaSection Texto CierreSection;
 SECTSIMPLE::= AperturaSimpleSect Texto CierreSimpleSect;
