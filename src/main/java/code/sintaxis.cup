@@ -101,7 +101,7 @@ terminal CierreInformalTable,
     EncabezadoXML,
     UndefinedToken;
 
-non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL, NOTERMINAL1, YEAR, HOLDER, NOTERMINAL2, VIDEOOBJECT, IMAGEOBJECT, IMAGEDATAN, VIDEODATAN, PARRAFO, SIMPARRAFO;
+non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL, NOTERMINAL1, YEAR, HOLDER, NOTERMINAL2, VIDEOOBJECT, IMAGEOBJECT, IMAGEDATAN, VIDEODATAN, PARRAFO, SIMPARRAFO, STREET, CITY, STATE, PHONE;
 start with INICIO;
 
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
@@ -111,6 +111,12 @@ CONTENIDO::= AperturaInfo INFORMACION CierreInfo | AperturaInfo INFORMACION Cier
 INFORMACION::= Texto | AperturaDate DATE CierreDate AperturaInfo INFORMACION CierreInfo | AperturaDate DATE CierreDate | AperturaCopyright COPYRIGHT CierreCopyright AperturaInfo INFORMACION CierreInfo | AperturaCopyright COPYRIGHT CierreCopyright | AperturaMediaObject MEDIAOBJECT CierreMediaObject AperturaInfo INFORMACION CierreInfo | AperturaMediaObject MEDIAOBJECT CierreMediaObject | AperturaAbstract ABSTRACT CierreAbstract AperturaInfo INFORMACION CierreInfo | AperturaAbstract ABSTRACT CierreAbstract | AperturaAddress ADDRESS CierreAddress AperturaInfo INFORMACION CierreInfo | AperturaAddress ADDRESS CierreAddress | AperturaTitulo TITULO CierreTitulo AperturaInfo INFORMACION CierreInfo | AperturaTitulo TITULO CierreTitulo;
 TITULO::= Texto |Texto AperturaTitulo TITULO CierreTitulo| AperturaEmphasis EMPHASIS CierreEmphasis | AperturaEmphasis EMPHASIS CierreEmphasis AperturaTitulo TITULO CierreTitulo | Link NLINK | Link NLINK AperturaTitulo TITULO CierreTitulo | AperturaEmail EMAIL CierreEmail | AperturaEmail EMAIL CierreEmail AperturaTitulo TITULO CierreTitulo;
 DATE::= Texto | NOTERMINAL1;
+ADDRESS::= Texto | Texto AperturaAddress ADDRESS CierreAddress | AperturaStreet STREET CierreStreet AperturaAddress ADDRESS CierreAddress | AperturaStreet STREET CierreStreet | AperturaCity CITY CierreCity AperturaAddress ADDRESS CierreAddress | AperturaCity CITY CierreCity |  AperturaState STATE CierreState AperturaAddress ADDRESS CierreAddress | AperturaState STATE CierreState | AperturaPhone PHONE CierrePhone AperturaAddress ADDRESS CierreAddress | AperturaPhone PHONE CierrePhone | AperturaEmail EMAIL CierreEmail; 
+STREET::= Texto;
+CITY::= Texto;
+STATE::= Texto;
+PHONE::= Texto;
+EMAIL::= Texto;
 ABSTRACT::= Texto | AperturaTitulo TITULO CierreTitulo AperturaPara PARRAFO CierrePara AperturaSimPara SIMPARRAFO CierreSimPara | AperturaTitulo TITULO CierreTitulo AperturaSimPara SIMPARRAFO CierreSimPara AperturaPara PARRAFO CierrePara | AperturaTitulo TITULO CierreTitulo AperturaPara PARRAFO CierrePara | AperturaTitulo TITULO CierreTitulo AperturaSimPara SIMPARRAFO CierreSimPara | AperturaPara PARRAFO CierrePara AperturaSimPara SIMPARRAFO CierreSimPara | AperturaSimPara SIMPARRAFO CierreSimPara AperturaPara PARRAFO CierrePara | AperturaPara PARRAFO CierrePara | AperturaSimPara SIMPARRAFO CierreSimPara;
 COPYRIGHT::= Texto | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright AperturaHolder HOLDER CierreHolder | AperturaYear YEAR CierreYear AperturaCopyright COPYRIGHT CierreCopyright  | AperturaYear YEAR CierreYear; 
 MEDIAOBJECT::= Texto | AperturaInfo INFORMACION CierreInfo NOTERMINAL2 | NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject NOTERMINAL2 | AperturaVideoobject VIDEOOBJECT CierreVideoobject | AperturaImageobject IMAGEOBJECT CierreImageobject NOTERMINAL2 | AperturaImageobject IMAGEOBJECT CierreImageobject;
