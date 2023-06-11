@@ -106,6 +106,7 @@ start with INICIO;
 
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
 ARTICULO::= CONTENIDO SECCION SECTSIMPLE | CONTENIDO SECCION | CONTENIDO SECTSIMPLE | CONTENIDO;  
+
 CONTENIDO::= AperturaItemizedList ITEMIZEDLIST CierreItemizedList CONTENIDO | AperturaItemizedList ITEMIZEDLIST CierreItemizedList | AperturaImportant IMPORTANT CierreImportant CONTENIDO | AperturaImportant IMPORTANT CierreImportant | AperturaPara PARRAFO CierrePara CONTENIDO | AperturaPara PARRAFO CierrePara | AperturaSimPara SIMPARRAFO CierreSimPara CONTENIDO | AperturaSimPara SIMPARRAFO CierreSimPara | AperturaAddress ADDRESS CierreAddress CONTENIDO | AperturaAddress ADDRESS CierreAddress | AperturaMediaObject MEDIAOBJECT CierreMediaObject CONTENIDO | AperturaMediaObject MEDIAOBJECT CierreMediaObject | AperturaInformalTable INFORMALTABLE CierreInformalTable CONTENIDO | AperturaInformalTable INFORMALTABLE CierreInformalTable | AperturaComment COMMENT CierreComment CONTENIDO | AperturaComment COMMENT CierreComment | AperturaAbstract ABSTRACT CierreAbstract CONTENIDO | AperturaAbstract ABSTRACT CierreAbstract;
 ENCABEZADO::= AperturaInfo INFORMACION CierreInfo | AperturaInfo INFORMACION CierreInfo AperturaTitulo TITULO CierreTitulo | AperturaTitulo TITULO CierreTitulo ;
 INFORMACION::= Texto | AperturaDate DATE CierreDate AperturaInfo INFORMACION CierreInfo | AperturaDate DATE CierreDate | AperturaCopyright COPYRIGHT CierreCopyright AperturaInfo INFORMACION CierreInfo | AperturaCopyright COPYRIGHT CierreCopyright | AperturaMediaObject MEDIAOBJECT CierreMediaObject AperturaInfo INFORMACION CierreInfo | AperturaMediaObject MEDIAOBJECT CierreMediaObject | AperturaAbstract ABSTRACT CierreAbstract AperturaInfo INFORMACION CierreInfo | AperturaAbstract ABSTRACT CierreAbstract | AperturaAddress ADDRESS CierreAddress AperturaInfo INFORMACION CierreInfo | AperturaAddress ADDRESS CierreAddress| AperturaAuthor AUTHOR CierreAuthor AperturaInfo INFORMACION CierreInfo | AperturaAuthor AUTHOR CierreAuthor | AperturaTitulo TITULO CierreTitulo AperturaInfo INFORMACION CierreInfo | AperturaTitulo TITULO CierreTitulo;
@@ -130,6 +131,6 @@ VIDEOOBJECT::= AperturaInfo INFORMACION CierreInfo VIDEODATAN | VIDEODATAN;
 IMAGEDATAN::= Texto;
 VIDEODATAN::= Texto;
 EMPHASIS::= Texto;
-SECCION::= AperturaSection Texto CierreSection;
-SECTSIMPLE::= AperturaSimpleSect Texto CierreSimpleSect;
+SECCION::= AperturaSection ARTICULO CierreSection;
+SECTSIMPLE::= AperturaSimpleSect ENCABEZADO CONTENIDO CierreSimpleSect| AperturaSimpleSect CONTENIDO CierreSimpleSect;
 
