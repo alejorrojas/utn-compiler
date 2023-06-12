@@ -105,7 +105,7 @@ non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFOR
 start with INICIO;
 
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
-ARTICULO::= CONTENIDO SECCION SECTSIMPLE | CONTENIDO SECCION | CONTENIDO SECTSIMPLE | CONTENIDO;  
+ARTICULO::= ENCABEZADO CONTENIDO SECCION SECTSIMPLE | CONTENIDO SECCION SECTSIMPLE | CONTENIDO SECCION | CONTENIDO SECTSIMPLE | CONTENIDO;  
 
 CONTENIDO::= AperturaItemizedList ITEMIZEDLIST CierreItemizedList CONTENIDO | AperturaItemizedList ITEMIZEDLIST CierreItemizedList | AperturaImportant IMPORTANT CierreImportant CONTENIDO | AperturaImportant IMPORTANT CierreImportant | AperturaPara PARRAFO CierrePara CONTENIDO | AperturaPara PARRAFO CierrePara | AperturaSimPara SIMPARRAFO CierreSimPara CONTENIDO | AperturaSimPara SIMPARRAFO CierreSimPara | AperturaAddress ADDRESS CierreAddress CONTENIDO | AperturaAddress ADDRESS CierreAddress | AperturaMediaObject MEDIAOBJECT CierreMediaObject CONTENIDO | AperturaMediaObject MEDIAOBJECT CierreMediaObject | AperturaInformalTable INFORMALTABLE CierreInformalTable CONTENIDO | AperturaInformalTable INFORMALTABLE CierreInformalTable | AperturaComment COMMENT CierreComment CONTENIDO | AperturaComment COMMENT CierreComment | AperturaAbstract ABSTRACT CierreAbstract CONTENIDO | AperturaAbstract ABSTRACT CierreAbstract;
 ENCABEZADO::= AperturaInfo INFORMACION CierreInfo | AperturaInfo INFORMACION CierreInfo AperturaTitulo TITULO CierreTitulo | AperturaTitulo TITULO CierreTitulo ;
