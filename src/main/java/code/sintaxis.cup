@@ -84,8 +84,8 @@ terminal CierreInformalTable,
     CierreRow,
     AperturaEntry,
     CierreEntry,
-    AperturaEntrybl,
-    CierreEntrybl,
+    AperturaEntrytbl,
+    CierreEntrytbl,
     AperturaVideoobject,
     CierreVideoobject,
     AperturaImageobject,
@@ -101,7 +101,7 @@ terminal CierreInformalTable,
     EncabezadoXML,
     UndefinedToken;
 
-non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL, NOTERMINALN, YEAR, HOLDER, VIDEOOBJECT, IMAGEOBJECT, IMAGEDATAN, VIDEODATAN, PARRAFO, SIMPARRAFO, STREET, CITY, STATE, PHONE, FIRSTNAME, SURNAME, ITEMIZEDLIST, IMPORTANT, INFORMALTABLE, COMMENT, LISTITEM, NOTERMINALX, NOTERMINALM, NOTERMINALZ, TGROUP, THEAD, TFOOT, TBODY, ROW, ENTRY, ENTRYBL;
+non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, ABSTRACT, AUTHOR, ADDRESS , EMPHASIS, NLINK, EMAIL, NOTERMINALN, YEAR, HOLDER, VIDEOOBJECT, IMAGEOBJECT, IMAGEDATAN, VIDEODATAN, PARRAFO, SIMPARRAFO, STREET, CITY, STATE, PHONE, FIRSTNAME, SURNAME, ITEMIZEDLIST, IMPORTANT, INFORMALTABLE, COMMENT, LISTITEM, NOTERMINALX, NOTERMINALM, NOTERMINALZ, TGROUP, THEAD, TFOOT, TBODY, ROW, ENTRY, ENTRYTBL;
 start with INICIO;
 
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
@@ -143,7 +143,9 @@ TGROUP::= AperturaThead THEAD CierreThead AperturaTfoot TFOOT CierreTfoot  Apert
 THEAD::= AperturaRow ROW CierreRow;
 TFOOT::= AperturaRow ROW CierreRow;
 TBODY::= AperturaRow ROW CierreRow;
-ROW::= AperturaEntry ENTRY CierreEntry AperturaRow ROW CierreRow | AperturaEntry ENTRY CierreEntry | AperturaEntrybl ENTRYBL CierreEntrybl AperturaRow ROW CierreRow | AperturaEntrybl ENTRYBL CierreEntrybl;    
+ROW::= AperturaEntry ENTRY CierreEntry AperturaRow ROW CierreRow | AperturaEntry ENTRY CierreEntry | AperturaEntrytbl ENTRYTBL CierreEntrytbl AperturaRow ROW CierreRow | AperturaEntrytbl ENTRYTBL CierreEntrytbl;    
+ENTRY::= NOTERMINALX;
+ENTRYTBL::= AperturaThead THEAD CierreThead AperturaTbody TBODY CierreTbody | AperturaTbody TBODY CierreTbody;
 SECCION::= AperturaSection ARTICULO CierreSection;
 SECTSIMPLE::= AperturaSimpleSect ENCABEZADO CONTENIDO CierreSimpleSect| AperturaSimpleSect CONTENIDO CierreSimpleSect;
 
