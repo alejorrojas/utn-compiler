@@ -1,5 +1,10 @@
 code\FrmPrincipal$1.class
-code\Principal.class
+code\FrmPrincipal$4.class
+code\sym.class
 code\FrmPrincipal$2.class
 code\FrmPrincipal.class
-code\Tokens.class
+code\Sintax.class
+code\CUP$Sintax$actions.class
+code\Principal.class
+code\FrmPrincipal$3.class
+code\LexerCup.class

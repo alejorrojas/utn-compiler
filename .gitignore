@@ -1,0 +1,18 @@
+# Carpeta de compilación y archivos generados por Maven
+target/
+build/
+
+# Archivos de configuración de IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Archivos de configuración específicos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Otros archivos y carpetas específicos del proyecto
+logs/
+*.log
+
