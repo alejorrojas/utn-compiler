@@ -97,8 +97,8 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 "</row>" {return new Symbol(sym.CierreRow, yychar, yyline, yytext());}
 "<entry>" {return new Symbol(sym.AperturaEntry, yychar, yyline, yytext());}
 "</entry>" {return new Symbol(sym.CierreEntry, yychar, yyline, yytext());}
-"<entrybl>" {return new Symbol(sym.AperturaEntrybl, yychar, yyline, yytext());}
-"</entrybl>" {return new Symbol(sym.CierreEntrybl, yychar, yyline, yytext());}
+"<entrytbl>" {return new Symbol(sym.AperturaEntrytbl, yychar, yyline, yytext());}
+"</entrytbl>" {return new Symbol(sym.CierreEntrytbl, yychar, yyline, yytext());}
 "<videoobject>" {return new Symbol(sym.AperturaVideoobject, yychar, yyline, yytext());}
 "</videoobject>" {return new Symbol(sym.CierreVideoobject, yychar, yyline, yytext());}
 "<imageobject>" {return new Symbol(sym.AperturaImageobject, yychar, yyline, yytext());}
@@ -110,6 +110,6 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 {videodata} {return new Symbol(sym.Videodata, yychar, yyline, yytext());}
 {imagedata} {return new Symbol(sym.Imagedata, yychar, yyline, yytext());}
 {espacio} {/*IGNORE*/}
-{error} {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
+{error} {/*IGNORE*/}
 ({texto}|{espacio}|{signos})* {return new Symbol(sym.Texto, yychar, yyline, yytext());}
- . {return new Symbol(sym.UndefinedToken, yychar, yyline, yytext());}
+ . {/*IGNORE*/}

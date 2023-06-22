@@ -97,7 +97,7 @@ terminal CierreInformalTable,
     AperturaListItem,
     CierreListItem,
     Texto,
-    EncabezadoXML,
+    EncabezadoXML;
 
 
 non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFORMACION, TITULO, DATE, COPYRIGHT, MEDIAOBJECT, NMEDIAOBJECT, ABSTRACT, NABSTRACT, AUTHOR, ADDRESS , EMPHASIS, LINK, EMAIL, YEAR, HOLDER, NHOLDER, VIDEOOBJECT, IMAGEOBJECT, PARRAFO, SIMPARRAFO, STREET, CITY, STATE, PHONE, FIRSTNAME, SURNAME, ITEMIZEDLIST, IMPORTANT, NIMPORTANT, INFORMALTABLE, COMMENT, LISTITEM, TGROUP, THEAD, TFOOT, TBODY, ROW, ENTRY, ENTRYTBL;
@@ -138,7 +138,7 @@ CONTENIDO::= AperturaItemizedList ITEMIZEDLIST CierreItemizedList CONTENIDO
 
 ENCABEZADO::= AperturaInfo INFORMACION CierreInfo 
     | AperturaInfo INFORMACION CierreInfo AperturaTitulo TITULO CierreTitulo 
-    | AperturaTitulo TITULO CierreTitulo ;
+    | AperturaTitulo TITULO CierreTitulo;
 
 INFORMACION::= AperturaMediaObject MEDIAOBJECT CierreMediaObject INFORMACION
     | AperturaMediaObject MEDIAOBJECT CierreMediaObject 
@@ -165,7 +165,7 @@ TITULO::= Texto
     | AperturaEmail EMAIL CierreEmail; 
 
 DATE::= Texto DATE 
-    |  Texto 
+    | Texto 
     | AperturaLink LINK CierreLink DATE 
     | AperturaLink LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis DATE 
@@ -178,15 +178,16 @@ AUTHOR::= AperturaFirstName FIRSTNAME CierreFirstName AUTHOR
     | AperturaSurname SURNAME CierreSurname;
 
 ADDRESS::= Texto 
-    | Texto AperturaAddress ADDRESS CierreAddress 
-    | AperturaStreet STREET CierreStreet AperturaAddress ADDRESS CierreAddress 
+    | Texto ADDRESS 
+    | AperturaStreet STREET CierreStreet ADDRESS 
     | AperturaStreet STREET CierreStreet 
-    | AperturaCity CITY CierreCity AperturaAddress ADDRESS CierreAddress 
+    | AperturaCity CITY CierreCity ADDRESS 
     | AperturaCity CITY CierreCity 
-    | AperturaState STATE CierreState AperturaAddress ADDRESS CierreAddress 
+    | AperturaState STATE CierreState ADDRESS 
     | AperturaState STATE CierreState 
-    | AperturaPhone PHONE CierrePhone AperturaAddress ADDRESS CierreAddress 
+    | AperturaPhone PHONE CierrePhone ADDRESS 
     | AperturaPhone PHONE CierrePhone 
+    | AperturaEmail EMAIL CierreEmail ADDRESS
     | AperturaEmail EMAIL CierreEmail;
 
 STREET::= Texto STREET 
@@ -368,7 +369,7 @@ COMMENT::= AperturaLink LINK CierreLink COMMENT
     | Texto;
 
 LINK::= AperturaLink LINK CierreLink LINK 
-    | LINK 
+    | AperturaLink LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis LINK
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment LINK
@@ -476,7 +477,7 @@ ENTRY::= Texto
     | AperturaComment COMMENT CierreComment ENTRY 
     | AperturaComment COMMENT CierreComment 
     | AperturaAbstract ABSTRACT CierreAbstract ENTRY 
-    | AperturaAbstract ABSTRACT CierreAbstract
+    | AperturaAbstract ABSTRACT CierreAbstract;
 
 ENTRYTBL::= AperturaThead THEAD CierreThead AperturaTbody TBODY CierreTbody 
     | AperturaTbody TBODY CierreTbody;

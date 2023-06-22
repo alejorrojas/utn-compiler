@@ -107,6 +107,8 @@ start with INICIO;
 INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
 
 ARTICULO::= ENCABEZADO CONTENIDO SECCION SECTSIMPLE 
+    | ENCABEZADO CONTENIDO SECTSIMPLE 
+    | ENCABEZADO CONTENIDO SECCION 
     | CONTENIDO SECCION SECTSIMPLE 
     | CONTENIDO SECCION 
     | CONTENIDO SECTSIMPLE 
@@ -178,15 +180,16 @@ AUTHOR::= AperturaFirstName FIRSTNAME CierreFirstName AUTHOR
     | AperturaSurname SURNAME CierreSurname;
 
 ADDRESS::= Texto 
-    | Texto AperturaAddress ADDRESS CierreAddress 
-    | AperturaStreet STREET CierreStreet AperturaAddress ADDRESS CierreAddress 
+    | Texto ADDRESS 
+    | AperturaStreet STREET CierreStreet ADDRESS 
     | AperturaStreet STREET CierreStreet 
-    | AperturaCity CITY CierreCity AperturaAddress ADDRESS CierreAddress 
+    | AperturaCity CITY CierreCity ADDRESS 
     | AperturaCity CITY CierreCity 
-    | AperturaState STATE CierreState AperturaAddress ADDRESS CierreAddress 
+    | AperturaState STATE CierreState ADDRESS 
     | AperturaState STATE CierreState 
-    | AperturaPhone PHONE CierrePhone AperturaAddress ADDRESS CierreAddress 
+    | AperturaPhone PHONE CierrePhone ADDRESS 
     | AperturaPhone PHONE CierrePhone 
+    | AperturaEmail EMAIL CierreEmail ADDRESS
     | AperturaEmail EMAIL CierreEmail;
 
 STREET::= Texto STREET 
