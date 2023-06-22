@@ -1,15 +1,13 @@
 package code;
 
 import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.StringReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
@@ -27,6 +25,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.darkGray);
+        resetHTML();
     }
 
     /**
@@ -47,34 +47,67 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnAbrirArchivo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 51, 51));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btnAnalizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAnalizar.setBackground(new java.awt.Color(33, 35, 36));
+        btnAnalizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnAnalizar.setForeground(new java.awt.Color(255, 255, 255));
         btnAnalizar.setText("Analizar");
+        btnAnalizar.setToolTipText("");
+        btnAnalizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(107, 107, 107)));
+        btnAnalizar.setBorderPainted(false);
+        btnAnalizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnalizar.setFocusPainted(false);
         btnAnalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnalizarActionPerformed(evt);
             }
         });
 
+        textoResultado.setEditable(false);
+        textoResultado.setBackground(new java.awt.Color(43, 43, 43));
         textoResultado.setColumns(20);
         textoResultado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         textoResultado.setRows(5);
+        textoResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        textoResultado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        textoResultado.setFocusable(false);
+        textoResultado.setMargin(new java.awt.Insets(6, 6, 6, 6));
         jScrollPane1.setViewportView(textoResultado);
 
+        btnReset.setBackground(new java.awt.Color(33, 35, 36));
+        btnReset.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(255, 255, 255));
         btnReset.setText("Limpiar");
+        btnReset.setToolTipText("");
+        btnReset.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(107, 107, 107)));
+        btnReset.setBorderPainted(false);
+        btnReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReset.setFocusPainted(false);
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
             }
         });
 
+        textoToAnalize.setBackground(new java.awt.Color(43, 43, 43));
         textoToAnalize.setColumns(20);
         textoToAnalize.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoToAnalize.setForeground(new java.awt.Color(204, 120, 50));
         textoToAnalize.setRows(5);
+        textoToAnalize.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane2.setViewportView(textoToAnalize);
 
-        btnAbrirArchivo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAbrirArchivo.setBackground(new java.awt.Color(33, 35, 36));
+        btnAbrirArchivo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnAbrirArchivo.setForeground(new java.awt.Color(255, 255, 255));
         btnAbrirArchivo.setText("Abrir archivo");
+        btnAbrirArchivo.setToolTipText("");
+        btnAbrirArchivo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(107, 107, 107)));
+        btnAbrirArchivo.setBorderPainted(false);
+        btnAbrirArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAbrirArchivo.setFocusPainted(false);
         btnAbrirArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirArchivoActionPerformed(evt);
@@ -86,71 +119,124 @@ public class FrmPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReset)
-                .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 629, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+                        .addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE))))
                 .addGap(127, 127, 127))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(32, 32, 32)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(724, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(32, 32, 32)
                     .addComponent(btnAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(1089, Short.MAX_VALUE)))
+                    .addContainerGap(1330, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReset)
-                .addGap(23, 23, 23))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(113, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(48, 48, 48)))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(41, 41, 41)
                     .addComponent(btnAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(351, Short.MAX_VALUE)))
+                    .addContainerGap(489, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void resetHTML() {                                         
+        //Borramos el HTML existente
+        Path outputFilePath = Paths.get("index.html");
+        if (Files.exists(outputFilePath)) {
+            try {
+                Files.delete(outputFilePath);
+            } catch (IOException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }    
+    
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
 
-        Sintax sintax = new Sintax(new code.LexerCup(new StringReader(textoToAnalize.getText())));
-
+        final String initializeHTML = "<!DOCTYPE html>\n" +
+            "<html lang=\"en\">\n" +
+            "  <head>\n" +
+            "    <meta charset=\"UTF-8\" />\n" +
+            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n" +
+            "    <title>Parser UTN</title>\n" +
+            "  </head>\n" +
+            "  <body>\n";
+        
+        final String clousingHTML = "</body>\n" + "</html>";
+        
         try {
-            sintax.parse();
-            textoResultado.setText("Analisis exitoso");
-            textoResultado.setForeground( new Color(25, 111, 61));
-        } catch (Exception ex) {
-            Symbol symbol = sintax.getSymbol();
-            textoResultado.setText("Error de sintaxis. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
-            textoResultado.setForeground( new Color(250, 0, 0));
+             //Si hay un HTML existente lo borramos
+             resetHTML();
+            
+            //Creamos el archivo de salida
+            File outputFile = new File("index.html");
+            FileWriter writter = new FileWriter("index.html");
+            writter.write(initializeHTML);
+            
+            
+            //Inicializamos el lexer y el parser
+            Sintax sintax;
+            LexerCup lexer;
+            lexer = new code.LexerCup(new StringReader(textoToAnalize.getText()));
+            sintax = new Sintax(lexer);
+            
+            try {
+                //Ejecutamos el parser
+                sintax.parse();
+                
+                //Mensaje final de exito
+                textoResultado.setText("    Analisis exitoso");
+                textoResultado.setForeground( new Color(42, 125, 55));
+                
+                //Cerramos el HTML
+                writter.write(clousingHTML);
+            } catch (Exception ex) {
+                 //Si ocurre un error en el parsing, anulamos la creacion del HTML
+                resetHTML();
+                
+                //Recuperamos el simbolo del error e imprimimos un mensaje
+                Symbol symbol = sintax.getSymbol();
+                textoResultado.setText("    Error de sintaxis. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
+                textoResultado.setForeground( new Color(176, 0, 32));
+                
+               
+                
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            writter.close();
+
+        } catch (IOException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+        } 
       
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
+        resetHTML();
         textoToAnalize.setText("");
         textoResultado.setText("");
         
