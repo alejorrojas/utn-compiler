@@ -161,6 +161,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void resetHTML() {                                         
         //Borramos el HTML existente
+        System.out.print("HTML eliminado\n");
         Path outputFilePath = Paths.get("index.html");
         if (Files.exists(outputFilePath)) {
             try {
