@@ -33,7 +33,7 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 "</article>" {return new Symbol(sym.CierreArticulo, yychar, yyline, yytext());}
 "<date>" {return new Symbol(sym.AperturaDate, yychar, yyline, yytext());}
 "</date>" {return new Symbol(sym.CierreDate, yychar, yyline, yytext());}
-"<title>" {return new Symbol(sym.AperturaTitulo, yychar, yyline, yytext());}
+"<title>" { return new Symbol(sym.AperturaTitulo, yychar, yyline, yytext());}
 "</title>" {return new Symbol(sym.CierreTitulo, yychar, yyline, yytext());}
 "<info>" {return new Symbol(sym.AperturaInfo, yychar, yyline, yytext());}
 "</info>" {return new Symbol(sym.CierreInfo, yychar, yyline, yytext());}

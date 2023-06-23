@@ -187,9 +187,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         final String clousingHTML = "</body>\n" + "</html>";
         
         try {
-             //Si hay un HTML existente lo borramos
-             resetHTML();
-            
+             
             //Creamos el archivo de salida
             File outputFile = new File("index.html");
             FileWriter writter = new FileWriter("index.html");
