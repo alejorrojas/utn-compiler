@@ -167,7 +167,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             try {
                 Files.delete(outputFilePath);
             } catch (IOException ex) {
-                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, "ERROR en Reset", ex);
             }
         }
 
@@ -175,28 +175,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
 
-        final String initializeHTML = "<!DOCTYPE html>\n" +
-            "<html lang=\"en\">\n" +
-            "  <head>\n" +
-            "    <meta charset=\"UTF-8\" />\n" +
-            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n" +
-            "    <title>Parser UTN</title>\n" +
-            "  </head>\n" +
-            "  <body>\n";
-        
-        final String clousingHTML = "</body>\n" + "</html>";
-        
-        try {
-             //Si hay un HTML existente lo borramos
-             resetHTML();
+       
             
             //Creamos el archivo de salida
             File outputFile = new File("index.html");
-            FileWriter writter = new FileWriter("index.html");
-            writter.write(initializeHTML);
-            
-            
-            //Inicializamos el lexer y el parser
+           
             Sintax sintax;
             LexerCup lexer;
             lexer = new code.LexerCup(new StringReader(textoToAnalize.getText()));
@@ -210,11 +193,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 textoResultado.setText("    Analisis exitoso");
                 textoResultado.setForeground( new Color(42, 125, 55));
                 
-                //Cerramos el HTML
-                writter.write(clousingHTML);
+
             } catch (Exception ex) {
-                 //Si ocurre un error en el parsing, anulamos la creacion del HTML
-                resetHTML();
                 
                 //Recuperamos el simbolo del error e imprimimos un mensaje
                 Symbol symbol = sintax.getSymbol();
@@ -226,12 +206,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            writter.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } 
+     
       
     }//GEN-LAST:event_btnAnalizarActionPerformed
 

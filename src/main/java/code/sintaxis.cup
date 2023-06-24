@@ -105,8 +105,11 @@ non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFOR
 start with INICIO;
 
 
-INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
+INICIO::= EncabezadoXML {:  System.out.print("<html><head></head><body>\n"); :} 
+          AperturaArticulo {:  System.out.print("<article>"); :}
+             ARTICULO 
+          CierreArticulo   {:  System.out.print("</article>"); :};
 
-ARTICULO::= AperturaTitulo {:  BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/index.html")); writer.write("<h1>");  :}
+ARTICULO::= AperturaPara {:  System.out.print("<p>"); :}
                 Texto 
-            CierreTitulo   {:  BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/index.html")); writer.write("Hola<h1>");  :};
+            CierrePara   {:  System.out.print("</p>");  :};
