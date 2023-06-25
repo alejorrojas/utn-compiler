@@ -9,9 +9,10 @@ import java_cup.runtime.Symbol;
 %char
 
 texto=[a-zA-Z_,0-9,/,\.]+
+textoURL=[\:,\-_,/,\.,&,#,=,?]+
 espacio=[ \t\r\n]+
-signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%·$]+
-url="https://".+|"http://".+|"ftp://".+|"ftps://".+
+signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%&·$]+
+url="https://"({textoURL}|{texto})*+|"http://"({textoURL}|{texto})*+|"ftp://"({textoURL}|{texto})*+|"ftps://"({textoURL}|{texto})*+
 AperturaLink="<link xlink:href:\""+{url}+"\" >"|"<link xlink:href:\""+{url}+"\">"
 videodata="<videodata fileref=\""+({url}|{texto})+"\" />"|"<videodata fileref:\""+({url}|{texto})+"\"/>"
 imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\""+({url}|{texto})+"\"/>"
