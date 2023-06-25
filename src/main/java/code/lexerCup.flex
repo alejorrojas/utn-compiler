@@ -111,5 +111,7 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 {imagedata} {return new Symbol(sym.Imagedata, yychar, yyline, yytext());}
 {espacio} {/*IGNORE*/}
 {error} {/*IGNORE*/}
-({texto}|{espacio}|{signos})* {return new Symbol(sym.Texto, yychar, yyline, yytext());}
+({texto}|{espacio}|{signos})* {
+        System.out.println(yytext());
+        return new Symbol(sym.Texto, yychar, yyline, yytext());}
  . {/*IGNORE*/}

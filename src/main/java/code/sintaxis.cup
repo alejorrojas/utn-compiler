@@ -2,7 +2,29 @@ package code;
 import java_cup.runtime.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 
+
+action code {: 
+
+    BufferedWriter writer;
+
+     public void InitFileWritter() throws IOException{
+        this.writer = new BufferedWriter(new FileWriter("index.html"));
+        this.Write("<html><head></head><body>\n");
+       
+    }
+
+    public void Write(String token) throws IOException{
+        this.writer.write(token);
+    }
+
+    public void CloseFileWritter() throws IOException{
+        this.writer.close();
+    }
+
+
+:};
 
 parser code
 {:
@@ -105,11 +127,11 @@ non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, SECCION, SECTSIMPLE, INFOR
 start with INICIO;
 
 
-INICIO::= EncabezadoXML {:  System.out.print("<html><head></head><body>\n"); :} 
-          AperturaArticulo {:  System.out.print("<article>"); :}
-             ARTICULO 
-          CierreArticulo   {:  System.out.print("</article>"); :};
+INICIO::= EncabezadoXML 
+          AperturaArticulo {:  this.Write("<article>"); :}
+            ARTICULO 
+          CierreArticulo   {:  this.Write("</article>");  :};
 
-ARTICULO::= AperturaPara {:  System.out.print("<p>"); :}
-                Texto 
-            CierrePara   {:  System.out.print("</p>");  :};
+ARTICULO::= AperturaPara {: this.Write("<p>Hola"); :}
+              Texto 
+            CierrePara   {: this.Write("</p>");   :};
