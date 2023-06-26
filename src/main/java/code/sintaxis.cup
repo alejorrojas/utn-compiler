@@ -138,7 +138,9 @@ ARTICULO::= ENCABEZADO CONTENIDO SECCION SECTSIMPLE
     | CONTENIDO SECTSIMPLE 
     | CONTENIDO;
 
-SECCION::= AperturaSection NSECTION CierreSection;
+SECCION::= AperturaSection {: this.Write("<section>"); :}
+        NSECTION 
+            CierreSection {: this.Write("</section>"); :};
 
 SECTSIMPLE::= AperturaSimpleSect ENCABEZADOSECTION CONTENIDO CierreSimpleSect
     | AperturaSimpleSect CONTENIDO CierreSimpleSect;
