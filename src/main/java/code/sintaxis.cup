@@ -12,7 +12,7 @@ action code {:
 
     public void InitFileWritter() throws IOException{
         this.writer = new BufferedWriter(new FileWriter("index.html"));
-        this.Write("<html><head></head><body>\n");
+        this.Write("<html>\n"+"<head></head>\n"+"<body>\n");
        
     }
 
@@ -21,6 +21,7 @@ action code {:
     }
 
     public void CloseFileWritter() throws IOException{
+        this.Write("</body>\n" + "</html>\n");
         this.writer.close();
     }
 
@@ -138,7 +139,7 @@ ARTICULO::= ENCABEZADO CONTENIDO SECCION SECTSIMPLE
     | CONTENIDO SECTSIMPLE 
     | CONTENIDO;
 
-SECCION::= AperturaSection NSECTION CierreSection;
+SECCION::= AperturaSection  NSECTION CierreSection;
 
 SECTSIMPLE::= AperturaSimpleSect ENCABEZADOSECTION CONTENIDO CierreSimpleSect
     | AperturaSimpleSect CONTENIDO CierreSimpleSect;
@@ -171,13 +172,13 @@ CONTENIDO::= AperturaItemizedList ITEMIZEDLIST CierreItemizedList CONTENIDO
     | AperturaAbstract ABSTRACT CierreAbstract CONTENIDO 
     | AperturaAbstract ABSTRACT CierreAbstract;
 
-ENCABEZADO::= AperturaInfo INFORMACION CierreInfo 
+ENCABEZADO::= AperturaInfo INFORMACION CierreInfo {:  this.Write("<h1>"); :}
     | AperturaInfo INFORMACION CierreInfo  AperturaTitulo TITULO CierreTitulo 
-    |  AperturaTitulo TITULO CierreTitulo ;
+    |  AperturaTitulo {:  this.Write("<h1>"); :} TITULO CierreTitulo {:  this.Write("Por favor</h1>"); :} ;
 
 ENCABEZADOSECTION::= AperturaInfo INFORMACION CierreInfo 
-    | AperturaInfo INFORMACION CierreInfo   AperturaTitulo TITULO CierreTitulo 
-    |  AperturaTitulo TITULO CierreTitulo  ;
+    | AperturaInfo INFORMACION CierreInfo  {:  this.Write("<h2>"); :}  AperturaTitulo TITULO CierreTitulo {:  this.Write("Dale che<h2>"); :} 
+    |  AperturaTitulo {:  this.Write("<h2>"); :} TITULO CierreTitulo {:  this.Write("Dale che<h2>"); :}  ;
 
 INFORMACION::= AperturaMediaObject MEDIAOBJECT CierreMediaObject INFORMACION
     | AperturaMediaObject MEDIAOBJECT CierreMediaObject 
