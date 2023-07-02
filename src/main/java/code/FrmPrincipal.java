@@ -189,10 +189,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
 
        
-            //Creamos el archivo de salida
-            File outputFile = new File("index.html");
-
- 
             //Inicializamos el lexer y el parser
             Sintax sintax;
             LexerCup lexer;
@@ -210,7 +206,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             } catch (Exception ex) {
                  //Si ocurre un error en el parsing, anulamos la creacion del HTML
-                
+                resetHTML();
+                 
                 //Recuperamos el simbolo del error e imprimimos un mensaje
                 Symbol symbol = sintax.getSymbol();
                 textoResultado.setText("    Error. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
