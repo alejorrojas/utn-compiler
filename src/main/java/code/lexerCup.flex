@@ -14,7 +14,7 @@ espacio=[ \t\r\n]+
 signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%&·$]+
 
 //Definiciones de Link, ImageData y VideoData
-textoURL=[a-zA-Z0-9:_\-/\.&#=]+
+textoURL=[a-zA-Z0-9:_\-/\.&#?=]+
 url="https://"+{textoURL}|"http://"+{textoURL}|"ftp://"+{textoURL}|"ftps://"+{textoURL}
 AperturaLink="<link xlink:href:\""+{url}+"\" >"|"<link xlink:href:\""+{url}+"\">"
 videodata="<videodata fileref=\""+({url}|{texto})+"\" />"|"<videodata fileref:\""+({url}|{texto})+"\"/>"
