@@ -118,5 +118,8 @@ imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\"
 {videodata} {return new Symbol(sym.Videodata, yychar, yyline, yytext());}
 {imagedata} {return new Symbol(sym.Imagedata, yychar, yyline, yytext());}
 {espacio} {/*IGNORE*/}
-({texto}|{espacio}|{signos})* {return new Symbol(sym.Texto, yychar, yyline, yytext());}
+({texto}|{espacio}|{signos})* {
+    System.out.print(yytext());
+    return new Symbol(sym.Texto, yychar, yyline, yytext());
+    }
  . {/*IGNORE*/}
