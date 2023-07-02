@@ -2,7 +2,6 @@ package code;
 
 import java.awt.Color;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
@@ -26,6 +25,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.darkGray);
+        //Si existe un HTML previo, lo borra para que no se sobreescriba uno existente
         resetHTML();
     }
 
@@ -159,28 +159,40 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * Si existe un HTML previo, lo borra
+     */
     private void resetHTML() {                                         
         //Borramos el HTML existente
-        System.out.print("HTML eliminado\n");
         Path outputFilePath = Paths.get("index.html");
         if (Files.exists(outputFilePath)) {
             try {
                 Files.delete(outputFilePath);
+                System.out.print("HTML eliminado\n");
+
             } catch (IOException ex) {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else{
+             System.out.print("No existía HTML \n");
+        }
 
     }    
     
+     /**
+     * Manejo del botón 'Analizar'
+     * Crea el HTML de salida
+     * Crea instancias del lexer y parser
+     * Ejecuta el parsing e imprime un mensaje de error/exito
+     */
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
 
        
             //Creamos el archivo de salida
             File outputFile = new File("index.html");
+            
  
-            
-            
             //Inicializamos el lexer y el parser
             Sintax sintax;
             LexerCup lexer;
@@ -197,32 +209,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             } catch (Exception ex) {
                  //Si ocurre un error en el parsing, anulamos la creacion del HTML
-                resetHTML();
                 
                 //Recuperamos el simbolo del error e imprimimos un mensaje
                 Symbol symbol = sintax.getSymbol();
-                textoResultado.setText("    Error de sintaxis. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
+                textoResultado.setText("    Error. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
                 textoResultado.setForeground( new Color(176, 0, 32));
                 
                
                 
-                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
 
   
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
+    /**
+     * Manejo del botón 'Limpiar'
+     * Setea el texto de analisis y de resultado en vacio
+     * Si existe un HTML, lo borra
+     */
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
         resetHTML();
         textoToAnalize.setText("");
         textoResultado.setText("");
         
 
     }//GEN-LAST:event_btnResetActionPerformed
-
+    
+     /**
+     * Manejo del botón 'Abrir Archivo'
+     * Contiene la logica del FileChooser
+     */
     private void btnAbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArchivoActionPerformed
-        // TODO add your handling code here:
+       
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
          File archivo = new File(chooser.getSelectedFile().getAbsolutePath());

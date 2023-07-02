@@ -1,5 +1,0 @@
-<!Doctype article> 
-<article>
-<info>Hello World</info>
-</article>
-

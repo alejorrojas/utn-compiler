@@ -8,17 +8,24 @@ import java_cup.runtime.Symbol;
 %line
 %char
 
+//Definiciones generales
 texto=[a-zA-Z_,0-9,/,\.]+
-textoURL=[\:,\-_,/,\.,&,#,=,?]+
 espacio=[ \t\r\n]+
 signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%&·$]+
-url="https://"({textoURL}|{texto})*+|"http://"({textoURL}|{texto})*+|"ftp://"({textoURL}|{texto})*+|"ftps://"({textoURL}|{texto})*+
+
+//Definiciones de Link, ImageData y VideoData
+textoURL=[a-zA-Z0-9:_\-/\.&#=]+
+url="https://"+{textoURL}|"http://"+{textoURL}|"ftp://"+{textoURL}|"ftps://"+{textoURL}
 AperturaLink="<link xlink:href:\""+{url}+"\" >"|"<link xlink:href:\""+{url}+"\">"
 videodata="<videodata fileref=\""+({url}|{texto})+"\" />"|"<videodata fileref:\""+({url}|{texto})+"\"/>"
 imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\""+({url}|{texto})+"\"/>"
-error="<"+({signos}|{texto}|{espacio})*+">"
+
+
 
 %{
+    /**
+    * Crea y devuelve un nuevo simbolo para luego ser utilizado en parser
+    */
     private Symbol symbol(int type, Object value){
         return new Symbol(type, yyline, yycolumn, value);
     }
@@ -111,6 +118,5 @@ error="<"+({signos}|{texto}|{espacio})*+">"
 {videodata} {return new Symbol(sym.Videodata, yychar, yyline, yytext());}
 {imagedata} {return new Symbol(sym.Imagedata, yychar, yyline, yytext());}
 {espacio} {/*IGNORE*/}
-{error} {/*IGNORE*/}
 ({texto}|{espacio}|{signos})* {return new Symbol(sym.Texto, yychar, yyline, yytext());}
  . {/*IGNORE*/}
