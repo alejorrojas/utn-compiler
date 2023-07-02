@@ -191,7 +191,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
        
             //Creamos el archivo de salida
             File outputFile = new File("index.html");
-            
+
  
             //Inicializamos el lexer y el parser
             Sintax sintax;
@@ -207,6 +207,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 textoResultado.setText("    Analisis exitoso");
                 textoResultado.setForeground( new Color(42, 125, 55));
 
+
             } catch (Exception ex) {
                  //Si ocurre un error en el parsing, anulamos la creacion del HTML
                 
@@ -220,7 +221,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
 
-  
+
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
     /**

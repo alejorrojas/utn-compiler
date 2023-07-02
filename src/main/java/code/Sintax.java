@@ -7,7 +7,6 @@
 package code;
 
 import java_cup.runtime.*;
-import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
