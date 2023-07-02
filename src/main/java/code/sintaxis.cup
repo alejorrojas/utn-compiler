@@ -15,7 +15,9 @@ action code {:
     */
     public void InitFileWritter() throws IOException{
         this.writer = new BufferedWriter(new FileWriter("index.html"));
-        this.Write("<html>\n"+"<head></head>\n"+"<body>\n");
+        this.Write("<html>\n"
+            +"<head><title>UTN Parser</title></head>\n"
+            +"<body>\n");
        
     }
     
@@ -131,7 +133,6 @@ terminal CierreInformalTable,
     Texto,
     AperturaTitulo,
     CierreTitulo,
-    CierreTituloArticle,
     EncabezadoXML;
 
 
@@ -139,7 +140,7 @@ non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, ENCABEZADOSECTION, SECCION
 start with INICIO;
 
 
-INICIO::= EncabezadoXML AperturaArticulo ARTICULO CierreArticulo;
+INICIO::= EncabezadoXML AperturaArticulo {:  this.Write("<article>"); :} ARTICULO CierreArticulo {:  this.Write("</article>"); :};
 
 ARTICULO::= ENCABEZADO CONTENIDO SECCION SECTSIMPLE 
     | ENCABEZADO CONTENIDO SECTSIMPLE 
@@ -182,12 +183,12 @@ CONTENIDO::= AperturaItemizedList ITEMIZEDLIST CierreItemizedList CONTENIDO
     | AperturaAbstract ABSTRACT CierreAbstract CONTENIDO 
     | AperturaAbstract ABSTRACT CierreAbstract;
 
-ENCABEZADO::= AperturaInfo INFORMACION CierreInfo {:  this.Write("<h1>"); :}
-    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo TITULO CierreTitulo 
+ENCABEZADO::= AperturaInfo INFORMACION CierreInfo 
+    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo {:  this.Write("<h1>"); :} TITULO CierreTitulo {:  this.Write("Por favor</h1>"); :}
     |  AperturaTitulo {:  this.Write("<h1>"); :} TITULO CierreTitulo {:  this.Write("Por favor</h1>"); :} ;
 
 ENCABEZADOSECTION::= AperturaInfo INFORMACION CierreInfo 
-    | AperturaInfo INFORMACION CierreInfo  {:  this.Write("<h2>"); :}  AperturaTitulo TITULO CierreTitulo {:  this.Write("Dale che<h2>"); :} 
+    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo {:  this.Write("<h2>"); :} TITULO CierreTitulo {:  this.Write("Dale che</h2>"); :} 
     |  AperturaTitulo {:  this.Write("<h2>"); :} TITULO CierreTitulo {:  this.Write("Dale che<h2>"); :}  ;
 
 INFORMACION::= AperturaMediaObject MEDIAOBJECT CierreMediaObject INFORMACION
