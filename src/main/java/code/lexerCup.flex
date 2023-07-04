@@ -3,6 +3,8 @@ import java_cup.runtime.Symbol;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 %%
 %class LexerCup
 %type java_cup.runtime.Symbol
@@ -12,14 +14,13 @@ import java.io.IOException;
 %char
 
 //Definiciones generales
-texto=[a-zA-Z_,0-9,/,\.]+
+texto=[a-zA-Z_,0-9,/,áéíóú]+
 espacio=[ \t\r\n]+
 signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%&·$]+
 
 //Definiciones de Link, ImageData y VideoData
 textoURL=[a-zA-Z0-9:_\-/\.&#?=]+
-url="https://"+{textoURL}|"http://"+{textoURL}|"ftp://"+{textoURL}|"ftps://"+{textoURL}
-AperturaLink="<link xlink:href:\""
+url="https://"+{textoURL}+"\""+({espacio})*+">"|"http://"+{textoURL}+"\""+({espacio})*+">"|"ftp://"+{textoURL}+"\""+({espacio})*+">"|"ftps://"+{textoURL}+"\""+({espacio})*+">"
 videodata="<videodata fileref=\""+({url}|{texto})+"\" />"|"<videodata fileref:\""+({url}|{texto})+"\"/>"
 imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\""+({url}|{texto})+"\"/>"
 
@@ -117,10 +118,10 @@ imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\"
     this.Write("</ul>"+"\n");
     return new Symbol(sym.CierreItemizedList, yychar, yyline, yytext());}
 "<important>" {
-    this.Write("<p style='background-color: red; color: white;'>");
+    this.Write("<div style='background-color: red; color: white;'>");
     return new Symbol(sym.AperturaImportant, yychar, yyline, yytext());}
 "</important>" {
-    this.Write("</p>"+"\n");
+    this.Write("</div>"+"\n");
     return new Symbol(sym.CierreImportant, yychar, yyline, yytext());}
 "<para>" {
     this.Write("<p>");
@@ -355,13 +356,13 @@ imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\"
 "</listitem>" {
     this.Write("</li>"+"\n");
     return new Symbol(sym.CierreListItem, yychar, yyline, yytext());}
-{AperturaLink} {
+"<link xlink:href:"\" {
+    System.out.print(yytext());
     this.Write("<a href=\"");
     return new Symbol(sym.AperturaLink, yychar, yyline, yytext());}
 {url} {
-    this.Write(yytext()+"\"");
-    this.Write(">");
-}
+        this.Write(yytext());
+        return new Symbol(sym.Url, yychar, yyline, yytext());}
 "</link>" {
     this.Write("</a>"+"\n");
     return new Symbol(sym.CierreLink, yychar, yyline, yytext());}

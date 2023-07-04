@@ -96,6 +96,7 @@ terminal CierreInformalTable,
     Texto,
     AperturaTitulo,
     CierreTitulo,
+    Url,
     EncabezadoXML;
 
 
@@ -173,15 +174,15 @@ TITULO::= Texto
     | Texto TITULO
     | AperturaEmphasis EMPHASIS CierreEmphasis TITULO
     | AperturaEmphasis EMPHASIS CierreEmphasis 
-    | AperturaLink LINK CierreLink TITULO
-    | AperturaLink LINK CierreLink
+    | AperturaLink Url LINK CierreLink TITULO
+    | AperturaLink Url LINK CierreLink
     | AperturaEmail EMAIL CierreEmail TITULO
     | AperturaEmail EMAIL CierreEmail; 
 
 DATE::= Texto DATE 
     | Texto 
-    | AperturaLink LINK CierreLink DATE 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink DATE 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis DATE 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment DATE;
@@ -206,8 +207,8 @@ ADDRESS::= Texto
 
 STREET::= Texto STREET 
     |  Texto 
-    | AperturaLink LINK CierreLink STREET 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink STREET 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis STREET 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment STREET
@@ -215,8 +216,8 @@ STREET::= Texto STREET
 
 CITY::= Texto CITY 
     |  Texto 
-    | AperturaLink LINK CierreLink CITY 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink CITY 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis CITY 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment CITY
@@ -224,8 +225,8 @@ CITY::= Texto CITY
 
 STATE::= Texto STATE 
     |  Texto 
-    | AperturaLink LINK CierreLink STATE 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink STATE 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis STATE 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment STATE
@@ -233,8 +234,8 @@ STATE::= Texto STATE
 
 PHONE::= Texto PHONE 
     |  Texto 
-    | AperturaLink LINK CierreLink PHONE 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink PHONE 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis PHONE 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment PHONE
@@ -242,8 +243,8 @@ PHONE::= Texto PHONE
 
 EMAIL::= Texto EMAIL 
     |  Texto 
-    | AperturaLink LINK CierreLink EMAIL 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink EMAIL 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis EMAIL 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment EMAIL
@@ -251,8 +252,8 @@ EMAIL::= Texto EMAIL
 
 FIRSTNAME::= Texto FIRSTNAME 
     | Texto 
-    | AperturaLink LINK CierreLink FIRSTNAME 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink FIRSTNAME 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis FIRSTNAME 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment FIRSTNAME
@@ -260,8 +261,8 @@ FIRSTNAME::= Texto FIRSTNAME
 
 SURNAME::= Texto SURNAME 
     |  Texto 
-    | AperturaLink LINK CierreLink SURNAME 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink SURNAME 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis SURNAME 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment SURNAME
@@ -269,8 +270,8 @@ SURNAME::= Texto SURNAME
 
 YEAR::= Texto YEAR 
     | Texto 
-    | AperturaLink LINK CierreLink YEAR 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink YEAR 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis YEAR 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment YEAR
@@ -296,8 +297,8 @@ NHOLDER::= AperturaHolder HOLDER CierreHolder NHOLDER
 
 HOLDER::= Texto HOLDER 
     | Texto 
-    | AperturaLink LINK CierreLink HOLDER 
-    | AperturaLink LINK CierreLink 
+    | AperturaLink Url LINK CierreLink HOLDER 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis HOLDER 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment HOLDER
@@ -320,8 +321,8 @@ IMAGEOBJECT::= AperturaInfo INFORMACION CierreInfo Imagedata
 VIDEOOBJECT::= AperturaInfo INFORMACION CierreInfo Videodata 
     | Videodata;
 
-EMPHASIS::= AperturaLink LINK CierreLink EMPHASIS 
-    | AperturaLink LINK CierreLink 
+EMPHASIS::= AperturaLink Url LINK CierreLink EMPHASIS 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis EMPHASIS 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment EMPHASIS 
@@ -333,8 +334,8 @@ EMPHASIS::= AperturaLink LINK CierreLink EMPHASIS
     | Texto EMPHASIS 
     | Texto;
 
-PARRAFO::= AperturaLink LINK CierreLink PARRAFO 
-    | AperturaLink LINK CierreLink 
+PARRAFO::= AperturaLink Url LINK CierreLink PARRAFO 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis PARRAFO 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment PARRAFO 
@@ -356,8 +357,8 @@ PARRAFO::= AperturaLink LINK CierreLink PARRAFO
     | AperturaInformalTable INFORMALTABLE CierreInformalTable PARRAFO
     | AperturaInformalTable INFORMALTABLE CierreInformalTable;
 
-SIMPARRAFO::= AperturaLink LINK CierreLink SIMPARRAFO 
-    | AperturaLink LINK CierreLink 
+SIMPARRAFO::= AperturaLink Url LINK CierreLink SIMPARRAFO 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis SIMPARRAFO 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment SIMPARRAFO 
@@ -369,8 +370,8 @@ SIMPARRAFO::= AperturaLink LINK CierreLink SIMPARRAFO
     | Texto SIMPARRAFO 
     | Texto;
 
-COMMENT::= AperturaLink LINK CierreLink COMMENT 
-    | AperturaLink LINK CierreLink 
+COMMENT::= AperturaLink Url LINK CierreLink COMMENT 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis COMMENT 
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment COMMENT 
@@ -382,8 +383,8 @@ COMMENT::= AperturaLink LINK CierreLink COMMENT
     | Texto COMMENT 
     | Texto;
 
-LINK::= AperturaLink LINK CierreLink LINK 
-    | AperturaLink LINK CierreLink 
+LINK::= AperturaLink Url LINK CierreLink LINK 
+    | AperturaLink Url LINK CierreLink 
     | AperturaEmphasis EMPHASIS CierreEmphasis LINK
     | AperturaEmphasis EMPHASIS CierreEmphasis 
     | AperturaComment COMMENT CierreComment LINK
