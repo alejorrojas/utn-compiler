@@ -18,6 +18,8 @@ import javax.swing.JFileChooser;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
+    private String nombreArchivo;
+
     /**
      * Creates new form FrmPrincipal
      */
@@ -25,8 +27,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.darkGray);
-        //Si existe un HTML previo, lo borra para que no se sobreescriba uno existente
-        resetHTML();
     }
 
     /**
@@ -164,7 +164,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     private void resetHTML() {                                         
         //Borramos el HTML existente
-        Path outputFilePath = Paths.get("index.html");
+        Path outputFilePath = Paths.get(this.nombreArchivo+".html");
         if (Files.exists(outputFilePath)) {
             try {
                 Files.delete(outputFilePath);
@@ -189,35 +189,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
 
        
-            //Inicializamos el lexer y el parser
-            Sintax sintax;
-            LexerCup lexer;
-            lexer = new code.LexerCup(new StringReader(textoToAnalize.getText()));
-            sintax = new Sintax(lexer);
-            
-            try {
-                //Ejecutamos el parser
-                sintax.parse();
-                
-                //Mensaje final de exito
-                textoResultado.setText("    Analisis exitoso");
-                textoResultado.setForeground( new Color(42, 125, 55));
 
-
-            } catch (Exception ex) {
-                 //Si ocurre un error en el parsing, anulamos la creacion del HTML
-                resetHTML();
-                 
-                //Recuperamos el simbolo del error e imprimimos un mensaje
-                Symbol symbol = sintax.getSymbol();
-                textoResultado.setText("    Error. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
-                textoResultado.setForeground( new Color(176, 0, 32));
                 
-               
                 
-                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
+                //Inicializamos el lexer y el parser
+                Sintax sintax;
+                LexerCup lexer;
+                lexer = new code.LexerCup(new StringReader(textoToAnalize.getText()));
+                sintax = new Sintax(lexer);
+                
+                try {
+                    //Ejecutamos el parser
+                    sintax.parse();
+                    
+                    //Mensaje final de exito
+                    textoResultado.setText("    Analisis exitoso");
+                    textoResultado.setForeground( new Color(42, 125, 55));
+                    
+                    File generatedFile = new File("index.html");
+                    File archivoNuevo = new File(this.nombreArchivo+".html");
 
+                    generatedFile.renameTo(archivoNuevo);
+                    
+                } catch (Exception ex) {
+                    //Si ocurre un error en el parsing, anulamos la creacion del HTML
+                    resetHTML();
+                    
+                    //Recuperamos el simbolo del error e imprimimos un mensaje
+                    Symbol symbol = sintax.getSymbol();
+                    textoResultado.setText("    Error. Linea: " + (symbol.right + 1) + " Columna: " + (symbol.left + 1) + " Texto: \"" + (symbol.value) + "\"" );
+                    textoResultado.setForeground( new Color(176, 0, 32));
+                    
+                    
+                    
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                }
+                
+                
+      
 
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
@@ -237,15 +246,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
      /**
      * Manejo del botón 'Abrir Archivo'
      * Contiene la logica del FileChooser
+     * Captura el nombre del archivo para la posterior creacion del HTML
      */
     private void btnAbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArchivoActionPerformed
        
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-         File archivo = new File(chooser.getSelectedFile().getAbsolutePath());
-         String StringToAnalize;
+        
+        //Resguardo el archivo seleccionado
+        File archivoToName = chooser.getSelectedFile();
+        
+        //Capturamos el nombre completo del archivo. Con su extension incluida
+        String nombreCompleto = archivoToName.getName();
+        
+        //Eliminamos la extension del archivo y solo nos quedamos con su nombre. Lo seteamos en una variable local del Form
+        this.nombreArchivo = nombreCompleto.substring(0, nombreCompleto.lastIndexOf("."));
+        System.out.print(this.nombreArchivo);
+        File archivoToAnalize = new File(chooser.getSelectedFile().getAbsolutePath());
+        String StringToAnalize;
         try {
-            StringToAnalize = new String(Files.readAllBytes(archivo.toPath()));
+            StringToAnalize = new String(Files.readAllBytes(archivoToAnalize.toPath()));
             textoToAnalize.setText(StringToAnalize);
         } catch (IOException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);

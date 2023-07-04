@@ -14,9 +14,9 @@ public class Principal {
 
  public static void main(String[] args) throws Exception {
         //Ruta del lexer
-        String rutaLexer = "C:/Users/alejo/Desktop/proyect/utn/utn-parser/src/main/java/code/lexerCup.flex";
+        String rutaLexer = "C:/Users/alejo/Desktop/proyectos/utn/utn-parser/src/main/java/code/lexerCup.flex";
         //Ruta del parser
-        String[] rutaSintaxis = {"-parser", "Sintax", "C:/Users/alejo/Desktop/proyect/utn/utn-parser/src/main/java/code/sintaxis.cup"};
+        String[] rutaSintaxis = {"-parser", "Sintax", "C:/Users/alejo/Desktop/proyectos/utn/utn-parser/src/main/java/code/sintaxis.cup"};
 
         generarLexerParser(rutaLexer, rutaSintaxis);
     }
@@ -34,23 +34,23 @@ public class Principal {
         java_cup.Main.main(pathSintaxis);
         
         //Mueve el archivo sym.java dentro del package de desarrollo code
-        Path rutaSym = Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-parser/src/main/java/code/sym.java");
+        Path rutaSym = Paths.get("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/src/main/java/code/sym.java");
              if (Files.exists(rutaSym)) {
             Files.delete(rutaSym);
         }
         Files.move(
-                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-parser/sym.java"), 
-                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-parser/src/main/java/code/sym.java")
+                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/sym.java"), 
+                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/src/main/java/code/sym.java")
         );
         
         //Mueve el archivo Sintax.java dentro del package de desarrollo code
-        Path rutaSin = Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-parser/src/main/java/code/Sintax.java");
+        Path rutaSin = Paths.get("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/src/main/java/code/Sintax.java");
         if (Files.exists(rutaSin)) {
             Files.delete(rutaSin);
         }
         Files.move(
-               Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-parser/Sintax.java"), 
-                Paths.get("C:/Users/alejo/Desktop/proyect/utn/utn-parser/src/main/java/code/Sintax.java")
+                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/Sintax.java"), 
+                Paths.get("C:/Users/alejo/Desktop/proyectos/utn/utn-parser/src/main/java/code/Sintax.java")
         );
  
     }

@@ -1,43 +1,6 @@
 package code;
 import java_cup.runtime.*;
-import java.io.FileReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
-
-action code {: 
-
-    BufferedWriter writer;  
-
-    /**
-    * Inicializa el Writter para escribir sobre el HTML
-    */
-    public void InitFileWritter() throws IOException{
-        this.writer = new BufferedWriter(new FileWriter("index.html"));
-        this.Write("<html>\n"
-            +"<head><title>UTN Parser</title></head>\n"
-            +"<body>\n");
-       
-    }
-    
-    /**
-    * Invoca al writter y nos permite escribir sobre el HTML
-    * @param token String a escribir sobre el archivo de salida
-    */
-    public void Write(String token) throws IOException{
-        this.writer.write(token);
-    }
-
-    /**
-    * Cierra el archivo y agrega etiquetas de cierre HTML
-    */
-    public void CloseFileWritter() throws IOException{
-        this.Write("</body>\n" + "</html>\n");
-        this.writer.close();
-    }
-
-:};
 
 parser code
 {:
@@ -140,7 +103,7 @@ non terminal INICIO, ARTICULO, ENCABEZADO, CONTENIDO, ENCABEZADOSECTION, SECCION
 start with INICIO;
 
 
-INICIO::= EncabezadoXML AperturaArticulo {:  this.Write("<article>"); :} ARTICULO CierreArticulo {:  this.Write("</article>"); :};
+INICIO::= EncabezadoXML AperturaArticulo  ARTICULO CierreArticulo;
 
 ARTICULO::= ENCABEZADO CONTENIDO SECCION SECTSIMPLE 
     | ENCABEZADO CONTENIDO SECTSIMPLE 
@@ -184,12 +147,12 @@ CONTENIDO::= AperturaItemizedList ITEMIZEDLIST CierreItemizedList CONTENIDO
     | AperturaAbstract ABSTRACT CierreAbstract;
 
 ENCABEZADO::= AperturaInfo INFORMACION CierreInfo 
-    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo {:  this.Write("<h1>"); :} TITULO CierreTitulo {:  this.Write("Por favor</h1>"); :}
-    |  AperturaTitulo {:  this.Write("<h1>"); :} TITULO CierreTitulo {:  this.Write("Por favor</h1>"); :} ;
+    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo  TITULO CierreTitulo
+    |  AperturaTitulo  TITULO CierreTitulo ;
 
 ENCABEZADOSECTION::= AperturaInfo INFORMACION CierreInfo 
-    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo {:  this.Write("<h2>"); :} TITULO CierreTitulo {:  this.Write("Dale che</h2>"); :} 
-    |  AperturaTitulo {:  this.Write("<h2>"); :} TITULO CierreTitulo {:  this.Write("Dale che<h2>"); :}  ;
+    | AperturaInfo INFORMACION CierreInfo  AperturaTitulo  TITULO CierreTitulo 
+    |  AperturaTitulo TITULO CierreTitulo ;
 
 INFORMACION::= AperturaMediaObject MEDIAOBJECT CierreMediaObject INFORMACION
     | AperturaMediaObject MEDIAOBJECT CierreMediaObject 
@@ -204,7 +167,7 @@ INFORMACION::= AperturaMediaObject MEDIAOBJECT CierreMediaObject INFORMACION
     | AperturaCopyright COPYRIGHT CierreCopyright INFORMACION
     | AperturaCopyright COPYRIGHT CierreCopyright 
     | AperturaTitulo TITULO CierreTitulo INFORMACION
-    | AperturaTitulo TITULO CierreTitulo;
+    | AperturaTitulo  TITULO CierreTitulo ;
 
 TITULO::= Texto 
     | Texto TITULO
@@ -502,11 +465,14 @@ TGROUP::= AperturaThead THEAD CierreThead AperturaTfoot TFOOT CierreTfoot  Apert
     | AperturaTfoot TFOOT CierreTfoot  AperturaTbody TBODY CierreTbody 
     | AperturaTbody TBODY CierreTbody;
 
-THEAD::= AperturaRow ROW CierreRow;
+THEAD::= AperturaRow ROW CierreRow 
+    | AperturaRow ROW CierreRow THEAD;
 
-TFOOT::= AperturaRow ROW CierreRow;
+TFOOT::= AperturaRow ROW CierreRow
+    | AperturaRow ROW CierreRow TFOOT;
 
-TBODY::= AperturaRow ROW CierreRow;
+TBODY::= AperturaRow ROW CierreRow
+    | AperturaRow ROW CierreRow TBODY;
 
 ROW::= AperturaEntry ENTRY CierreEntry ROW  
     | AperturaEntry ENTRY CierreEntry 
