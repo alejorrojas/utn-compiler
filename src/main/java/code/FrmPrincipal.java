@@ -203,7 +203,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     sintax.parse();
                     
                     //Mensaje final de exito
-                    textoResultado.setText("    Analisis exitoso");
+                    textoResultado.setText("    Analisis exitoso\n");
                     textoResultado.setForeground( new Color(42, 125, 55));
                     
                     File generatedFile = new File("index.html");

@@ -20,9 +20,10 @@ signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%&·$]+
 
 //Definiciones de Link, ImageData y VideoData
 textoURL=[a-zA-Z0-9:_\-/\.&#?=]+
-url="https://"+{textoURL}+"\""+({espacio})*+">"|"http://"+{textoURL}+"\""+({espacio})*+">"|"ftp://"+{textoURL}+"\""+({espacio})*+">"|"ftps://"+{textoURL}+"\""+({espacio})*+">"
-videodata="<videodata fileref=\""+({url}|{texto})+"\" />"|"<videodata fileref:\""+({url}|{texto})+"\"/>"
-imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\""+({url}|{texto})+"\"/>"
+LinkUrl="https://"+{textoURL}+"\""+({espacio})*+">"|"http://"+{textoURL}+"\""+({espacio})*+">"|"ftp://"+{textoURL}+"\""+({espacio})*+">"|"ftps://"+{textoURL}+"\""+({espacio})*+">"
+DataUrl="https://"+{textoURL}|"http://"+{textoURL}|"ftp://"+{textoURL}|"ftps://"+{textoURL}
+videodata="<videodata fileref=\""+({DataUrl}|{texto})+"\" />"|"<videodata fileref:\""+({DataUrl}|{texto})+"\"/>"
+imagedata="<imagedata fileref=\""+({DataUrl}|{texto})+"\" />"|"<imagedata fileref:\""+({DataUrl}|{texto})+"\"/>"
 
 
 
@@ -360,7 +361,7 @@ imagedata="<imagedata fileref=\""+({url}|{texto})+"\" />"|"<imagedata fileref:\"
     System.out.print(yytext());
     this.Write("<a href=\"");
     return new Symbol(sym.AperturaLink, yychar, yyline, yytext());}
-{url} {
+{LinkUrl} {
         this.Write(yytext());
         return new Symbol(sym.Url, yychar, yyline, yytext());}
 "</link>" {
