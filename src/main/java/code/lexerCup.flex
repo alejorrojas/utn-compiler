@@ -21,9 +21,9 @@ signos=[\,,\+,\:,*/\[\]{}\.;\-_=@\"!¡¿?\|#\\)()%&·$]+
 //Definiciones de Link, ImageData y VideoData
 textoURL=[a-zA-Z0-9:_\-/\.&#?=]+
 LinkUrl="https://"+{textoURL}+"\""+({espacio})*+">"|"http://"+{textoURL}+"\""+({espacio})*+">"|"ftp://"+{textoURL}+"\""+({espacio})*+">"|"ftps://"+{textoURL}+"\""+({espacio})*+">"
-DataUrl="https://"+{textoURL}|"http://"+{textoURL}|"ftp://"+{textoURL}|"ftps://"+{textoURL}
-videodata="<videodata fileref=\""+({DataUrl}|{texto})+"\" />"|"<videodata fileref:\""+({DataUrl}|{texto})+"\"/>"
-imagedata="<imagedata fileref=\""+({DataUrl}|{texto})+"\" />"|"<imagedata fileref:\""+({DataUrl}|{texto})+"\"/>"
+dataUrl="https://"+{textoURL}|"http://"+{textoURL}|"ftp://"+{textoURL}|"ftps://"+{textoURL}
+videodata="<videodata fileref=\""+({dataUrl}|{textoURL})+"\" />"|"<videodata fileref:\""+({dataUrl}|{textoURL})+"\"/>"
+imagedata="<imagedata fileref=\""+({dataUrl}|{textoURL})+"\" />"|"<imagedata fileref:\""+({dataUrl}|{textoURL})+"\"/>"
 
 
 
