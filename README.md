@@ -1,12 +1,12 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/UTN_logo.jpg" width="120" /> 
 
-# Parser Docbook - HTML 
+# Compiler Docbook (XML) - HTML 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Abstract 📜
 
-The Parser Docbook - HTML is a lexical and syntactic analyzer that allows analyzing, validating, and transforming a subset of tags from the DocBook/XML specification for article description.
+The Compiler Docbook (XML) - HTML is a lexical and syntactic analyzer that allows analyzing, validating, and transforming a subset of tags from the DocBook/XML specification for article description.
 
 The program takes an XML file with DocBook content as input and checks whether it adheres to the well-structured standards defined by the specification. In case of any errors or non-compliance, it provides indications about the issues encountered. Additionally, while analyzing the document, it transforms the content into an HTML document, making it easier to display and share the content.
 
@@ -19,7 +19,7 @@ The program takes an XML file with DocBook content as input and checks whether i
 
 ## Getting Started 🧩
 
-To get started with the Parser Docbook - HTML, follow these steps:
+To get started with the Compiler Docbook - HTML, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/your-username/parser-docbook-html.git`
 2. Install the necessary dependencies: JFlex - CUP.
@@ -27,7 +27,7 @@ To get started with the Parser Docbook - HTML, follow these steps:
 
 ## Contribution 🎫
 
-Contributions to the Parser Docbook - HTML project are welcome! If you find any bugs, have suggestions, or want to contribute new features, please feel free to open issues and submit pull requests.
+Contributions to the Compiler Docbook - HTML project are welcome! If you find any bugs, have suggestions, or want to contribute new features, please feel free to open issues and submit pull requests.
 
 ## License
 
