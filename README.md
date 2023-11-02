@@ -21,7 +21,7 @@ The program takes an XML file with DocBook content as input and checks whether i
 
 To get started with the Compiler Docbook - HTML, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/parser-docbook-html.git`
+1. Clone the repository: `git clone https://github.com/alejorrojas/utn-compiler.git`
 2. Install the necessary dependencies: JFlex - CUP.
 3. Run the program with an XML file containing DocBook content.
 
